@@ -7,7 +7,7 @@ type WritingCardProps = {
 };
 
 const cardClassName =
-  "rounded-sm border border-border bg-surface transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_4px_12px_rgba(20,20,20,0.06)]";
+  "hover-raise rounded-sm border border-border bg-surface transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_4px_12px_rgba(20,20,20,0.06)]";
 
 export function WritingCard({ item }: WritingCardProps) {
   return (

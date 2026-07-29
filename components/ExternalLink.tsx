@@ -5,8 +5,8 @@ type ExternalLinkProps = ComponentPropsWithoutRef<"a"> & {
 };
 
 /**
- * External / mailto links with sensible defaults.
- * Same-origin paths (e.g. resume PDF) stay in the same tab unless overridden.
+ * External / mailto / PDF links with sensible defaults.
+ * Same-origin paths stay in the same tab unless overridden (e.g. resume).
  */
 export function ExternalLink({
   href,
@@ -18,21 +18,34 @@ export function ExternalLink({
 }: ExternalLinkProps) {
   const isExternal = href.startsWith("http://") || href.startsWith("https://");
   const isMailto = href.startsWith("mailto:");
+  const isPdf = /\.pdf($|\?)/i.test(href);
+  const resolvedTarget = target ?? (isExternal ? "_blank" : undefined);
+  const opensInNewTab = resolvedTarget === "_blank";
+  const resolvedRel =
+    rel ??
+    (isExternal || opensInNewTab ? "noopener noreferrer" : undefined);
+
+  let announcement: string | null = null;
+  if (isMailto) {
+    announcement = " (opens email)";
+  } else if (isPdf && opensInNewTab) {
+    announcement = " (PDF, opens in a new tab)";
+  } else if (isPdf) {
+    announcement = " (PDF)";
+  } else if (opensInNewTab) {
+    announcement = " (opens in a new tab)";
+  }
 
   return (
     <a
       href={href}
       className={className}
-      target={target ?? (isExternal ? "_blank" : undefined)}
-      rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+      target={resolvedTarget}
+      rel={resolvedRel}
       {...props}
     >
       {children}
-      {isExternal || isMailto ? (
-        <span className="sr-only">
-          {isMailto ? " (opens email)" : " (opens in a new tab)"}
-        </span>
-      ) : null}
+      {announcement ? <span className="sr-only">{announcement}</span> : null}
     </a>
   );
 }

@@ -76,7 +76,7 @@ export function Projects() {
         })}
       </div>
 
-      <ul className="mt-8 flex list-none flex-col gap-4 p-0">
+      <ul id="projects-list" className="mt-8 flex list-none flex-col gap-4 p-0">
         {visible.map((project) => (
           <li key={project.id}>
             <ProjectCard project={project} />
@@ -88,6 +88,7 @@ export function Projects() {
         <ShowMoreButton
           expanded={showAll}
           count={hiddenCount}
+          controlsId="projects-list"
           onClick={() => setShowAll((v) => !v)}
         />
       ) : null}

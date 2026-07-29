@@ -33,7 +33,7 @@ export function ShippingLog() {
         <GitHubSlot />
 
         <div>
-          <ol className="list-none p-0">
+          <ol id="now-entries" className="list-none p-0">
             {visible.map((entry, index) => (
               <li key={entry.id}>
                 <LogEntry
@@ -48,6 +48,7 @@ export function ShippingLog() {
             <ShowMoreButton
               expanded={showAll}
               count={hiddenCount}
+              controlsId="now-entries"
               onClick={() => setShowAll((v) => !v)}
             />
           ) : null}

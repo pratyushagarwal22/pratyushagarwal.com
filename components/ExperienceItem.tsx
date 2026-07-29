@@ -16,7 +16,7 @@ export function ExperienceItem({ item }: ExperienceItemProps) {
   const meta = item.location ? `${dates} · ${item.location}` : dates;
 
   return (
-    <article className="rounded-sm border border-border bg-surface transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_4px_12px_rgba(20,20,20,0.06)]">
+    <article className="hover-raise rounded-sm border border-border bg-surface transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_4px_12px_rgba(20,20,20,0.06)]">
       <button
         type="button"
         aria-expanded={expanded}
@@ -54,7 +54,8 @@ export function ExperienceItem({ item }: ExperienceItemProps) {
 
       <div
         id={panelId}
-        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        inert={!expanded ? true : undefined}
+        className="expand-panel grid transition-[grid-template-rows] duration-300 ease-out"
         style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
       >
         <div className="overflow-hidden">

@@ -106,7 +106,8 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
 
         <div
           id={panelId}
-          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          inert={!expanded ? true : undefined}
+          className="expand-panel grid transition-[grid-template-rows] duration-300 ease-out"
           style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
         >
           <div className="overflow-hidden">

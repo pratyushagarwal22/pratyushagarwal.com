@@ -30,7 +30,7 @@ export function Experience() {
         Roles and internships — click to expand for detail.
       </p>
 
-      <ul className="mt-8 flex list-none flex-col gap-4 p-0">
+      <ul id="experience-list" className="mt-8 flex list-none flex-col gap-4 p-0">
         {visible.map((item) => (
           <li key={item.id}>
             <ExperienceItem item={item} />
@@ -42,6 +42,7 @@ export function Experience() {
         <ShowMoreButton
           expanded={showAll}
           count={hiddenCount}
+          controlsId="experience-list"
           onClick={() => setShowAll((v) => !v)}
         />
       ) : null}
