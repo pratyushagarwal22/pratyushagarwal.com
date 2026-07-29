@@ -1,10 +1,10 @@
 import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ShippingLog } from "@/components/ShippingLog";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
 const sections = [
-  { id: "now", title: "Now" },
   { id: "projects", title: "Projects" },
   { id: "experience", title: "Experience" },
   { id: "writing", title: "Writing" },
@@ -18,6 +18,7 @@ export default function Home() {
       <main id="main" className="mx-auto w-full max-w-[720px] flex-1 px-6 py-16">
         <div className="flex flex-col gap-16 sm:gap-24">
           <Hero />
+          <ShippingLog />
           {sections.map((section) => (
             <section
               key={section.id}
