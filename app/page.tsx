@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { Projects } from "@/components/Projects";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ShippingLog } from "@/components/ShippingLog";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -6,7 +7,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StatsStrip } from "@/components/StatsStrip";
 
 const sections = [
-  { id: "projects", title: "Projects" },
   { id: "experience", title: "Experience" },
   { id: "writing", title: "Writing" },
   { id: "about", title: "About" },
@@ -23,6 +23,7 @@ export default function Home() {
             <ShippingLog />
           </div>
           <StatsStrip />
+          <Projects />
           <div className="flex w-full max-w-[720px] flex-col gap-16 sm:gap-24">
             {sections.map((section) => (
               <section

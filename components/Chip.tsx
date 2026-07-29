@@ -1,4 +1,4 @@
-type ChipVariant = "default" | "flagship";
+type ChipVariant = "default" | "flagship" | "active";
 
 type ChipProps = {
   label: string;
@@ -9,7 +9,9 @@ export function Chip({ label, variant = "default" }: ChipProps) {
   const variantClass =
     variant === "flagship"
       ? "border-accent/30 bg-accent/5 text-accent"
-      : "border-transparent bg-chip-bg text-chip-text";
+      : variant === "active"
+        ? "border-accent bg-accent/10 text-accent"
+        : "border-transparent bg-chip-bg text-chip-text";
 
   return (
     <span
