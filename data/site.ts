@@ -4,36 +4,54 @@ export type SocialLink = {
   href: string;
 };
 
-/** Minimal stub for Task 2 shell. Full site content lands in Task 4. */
-export const site = {
+export type SiteContent = {
+  name: string;
+  shortName: string;
+  title: string;
+  oneLiner: string;
+  currentlyBuilding: { name: string; href: string };
+  resumeHref: string;
+  profileImageSrc: string;
+  socials: SocialLink[];
+  about: string;
+};
+
+export const site: SiteContent = {
   name: "Pratyush Agarwal",
   shortName: "Pratyush",
+  title: "Pratyush Agarwal — Building software in public",
+  oneLiner:
+    "I like building things people actually use.\nThree years shipping data systems in production, now all in on software engineering. Proof, not promises, one commit at a time.",
+  currentlyBuilding: { name: "Mnemo", href: "#projects" },
   resumeHref: "/pratyush-agarwal-resume.pdf",
+  profileImageSrc: "/profile.png",
   socials: [
     {
-      id: "email" as const,
+      id: "email",
       label: "Email",
       href: "mailto:hi@pratyushagarwal.com",
     },
     {
-      id: "github" as const,
+      id: "github",
       label: "GitHub",
-      href: "https://github.com/pratyushagarwal22",
+      href: "https://www.github.com/pratyushagarwal22",
     },
     {
-      id: "linkedin" as const,
+      id: "linkedin",
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/agarwal-pratyush",
+      href: "https://www.linkedin.com/in/agarwal-pratyush/",
     },
     {
-      id: "medium" as const,
+      id: "medium",
       label: "Medium",
-      href: "https://medium.com/@agarwal-pratyush",
+      href: "https://www.medium.com/@agarwal-pratyush",
     },
     {
-      id: "substack" as const,
+      id: "substack",
       label: "Substack",
-      href: "https://substack.com/@agarwalpratyush",
+      href: "https://www.substack.com/@agarwalpratyush",
     },
-  ] satisfies SocialLink[],
+  ],
+  about:
+    "I spent three years working with data across Kohler, Apna, and Google, building pipelines, automation, and systems that teams relied on every day. Somewhere along the way I realized the parts I loved most were the software parts: designing APIs, shipping products, watching people use what I built. So I'm going all in on software engineering. I don't have years of a traditional SWE title behind me, but I have production experience, I learn fast, and I'm building the proof in the open: every project public, every milestone logged, every lesson written up. If you want to see how I work, it's all here.",
 };

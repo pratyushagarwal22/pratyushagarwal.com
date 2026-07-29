@@ -152,7 +152,7 @@ Expected: success; assets in output.
 - Create: `data/site.ts`, `data/log.ts`, `data/stats.ts`, `data/skills.ts`, `data/projects.ts`, `data/publications.ts`, `data/experience.ts`, `data/writing.ts`
 - Types exactly as design.md §8 (`source: 'manual' | 'github'` on log; v1 entries all `manual`)
 
-**Needs from you:** **Required** — real copy and URLs (or explicit approval of agent-drafted copy in-session). Especially: one-liner, about, ≥5 log entries, 7 projects, 3 publications, 3 experiences, writing links, project GitHub/demo URLs.
+**Needs from you:** **Required** — real copy and URLs (or explicit approval of agent-drafted copy in-session). Especially: one-liner, about, ≥5 log entries, 7 projects, 3 publications, 7 experiences, writing links, project GitHub/demo URLs.
 
 **Steps:**
 - [ ] Implement types + exports per design.md
@@ -298,7 +298,7 @@ npm run build
 
 ### Task 9: Experience
 
-**Goal:** Three expandable roles, engineering-forward bullets.
+**Goal:** Seven expandable roles (newest first), engineering-forward bullets + tech chips; show 3 by default with Show more / Show less.
 
 **Files:**
 - Create: `components/Experience.tsx`, `components/ExperienceItem.tsx`
@@ -307,16 +307,19 @@ npm run build
 
 **Needs from you:** None beyond Task 4.
 
+**Reuse rule:** Tech chips **must** use existing `Chip`; show more/less **must** use existing `ShowMoreButton`. Do not create duplicates.
+
 **Steps:**
 - [ ] Collapsed: company, role, dates
-- [ ] Expand: bullets; `aria-expanded`
-- [ ] Newest first (Kohler → Apna → Google/Smollan)
+- [ ] Expand: bullets + tech chips (`Chip`); `aria-expanded`
+- [ ] Newest first: Kohler → stu/dio → Apna → Google/Smollan → SPACENOS → OnePlus → Haryana Police
+- [ ] Default visible: **3** roles; Show more / Show less reveals the rest
 
 **Verify:**
 ```bash
 npm run dev
 ```
-Browser: three rows; expand Kohler → bullets; order correct.
+Browser: three rows by default; Show more reveals 7; expand Kohler → bullets + tech chips; order correct.
 ```bash
 npm run build
 ```

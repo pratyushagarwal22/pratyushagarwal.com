@@ -186,11 +186,16 @@ Order is fixed: Hero → Now → Stats → Projects → Publications → Experie
 ### 6.6 Experience (`#experience`)
 
 - Expandable rows (company, role, dates always visible)
-- Expand: engineering-forward bullets (pipelines, APIs, automation, production)
+- Expand: engineering-forward bullets (pipelines, APIs, automation, production) + tech chips (`Chip`)
+- Seven roles, newest first; default visible **3**, then **Show more / Show less** (`ShowMoreButton`)
 - Order (newest first):
   - Kohler Co. — Data Engineer Intern (Jun 2025–May 2026)
+  - The stu/dio at Illinois — Project Manager (Dec 2024–Jun 2025)
   - Apna — Data Engineer (Oct 2022–Aug 2024)
   - Google via Smollan — Strategy & Analytics Intern (Oct 2021–Apr 2022)
+  - SPACENOS — Product Manager Intern (May 2021–Jul 2021)
+  - OnePlus — Marketing Specialist Intern (Sep 2020–Feb 2021)
+  - Haryana Police — Cybersecurity Intern, GPCSSI'20 (Jun 2020–Jul 2020)
 - No logo farm; text-first
 
 ### 6.7 Writing (`#writing`)
@@ -270,6 +275,7 @@ export type SocialLink = {
 
 export type SiteContent = {
   name: string;
+  shortName: string; // header mark
   title: string; // browser / OG
   oneLiner: string;
   currentlyBuilding: { name: string; href: string }; // in-page anchor
@@ -359,7 +365,8 @@ export type ExperienceItem = {
   location?: string;
   start: string; // "Jun 2025"
   end: string; // "May 2026" | "Present"
-  summary: string; // one line collapsed optional
+  summary?: string; // one line collapsed optional
+  tech: string[]; // chip labels (shared Chip)
   bullets: string[]; // engineering-forward
 };
 ```
