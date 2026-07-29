@@ -22,8 +22,32 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pratyush Agarwal",
-  description: "Building software in public.",
+  metadataBase: new URL("https://pratyushagarwal.com"),
+  title: "Pratyush Agarwal — Building software in public",
+  description:
+    "Software engineer building in public. Three years shipping data systems, now all in on software engineering. Proof, not promises, one commit at a time.",
+  openGraph: {
+    title: "Pratyush Agarwal — Building software in public",
+    description:
+      "Software engineer building in public. Three years shipping data systems, now all in on software engineering. Proof, not promises, one commit at a time.",
+    type: "website",
+    url: "https://pratyushagarwal.com",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Pratyush Agarwal — Building software in public",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pratyush Agarwal — Building software in public",
+    description:
+      "Software engineer building in public. Three years shipping data systems, now all in on software engineering. Proof, not promises, one commit at a time.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({
