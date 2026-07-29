@@ -1,33 +1,36 @@
+import { SectionHeading } from "@/components/SectionHeading";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+
+const sections = [
+  { id: "now", title: "Now" },
+  { id: "projects", title: "Projects" },
+  { id: "experience", title: "Experience" },
+  { id: "writing", title: "Writing" },
+  { id: "about", title: "About" },
+] as const;
+
 export default function Home() {
   return (
-    <main className="mx-auto max-w-xl px-6 py-16">
-      <h1 className="font-display text-4xl text-text">Pratyush Agarwal</h1>
-      <p className="mt-4 font-body text-base text-text-muted">
-        Building software in public. This temporary page proves display,
-        body, and mono type samples plus the locked accent.
-      </p>
-      <p className="mt-6">
-        <span className="inline-block rounded-sm bg-chip-bg px-2 py-1 font-mono text-sm text-chip-text">
-          shipped
-        </span>
-      </p>
-      <p className="mt-8">
-        <a
-          href="#sample"
-          className="font-body text-accent underline-offset-4 hover:text-accent-hover hover:underline"
-        >
-          Accent sample link
-        </a>
-      </p>
-      <p className="mt-4">
-        <button
-          type="button"
-          id="sample"
-          className="rounded-sm bg-accent px-4 py-2 font-body text-sm text-white hover:bg-accent-hover"
-        >
-          Accent sample button
-        </button>
-      </p>
-    </main>
+    <div id="top" className="flex min-h-full flex-col">
+      <SiteHeader />
+      <main id="main" className="mx-auto w-full max-w-[720px] flex-1 px-6 py-16">
+        <div className="flex flex-col gap-16 sm:gap-24">
+          {sections.map((section) => (
+            <section
+              key={section.id}
+              id={section.id}
+              aria-labelledby={`${section.id}-heading`}
+              className="scroll-mt-20"
+            >
+              <SectionHeading id={`${section.id}-heading`}>
+                {section.title}
+              </SectionHeading>
+            </section>
+          ))}
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }
