@@ -119,18 +119,19 @@ v1 is fully static: no client-side data fetching, no runtime APIs. Images via `n
 | Hero identity + CTAs | Full log bodies |
 | Stats numbers + labels | Project long description, outcomes |
 | Project titles + short blurb + tags | Experience bullet detail |
+| Publication titles + venue + date | Optional longer abstract |
 | Writing titles | — |
 | About thesis (short) | Optional longer About if needed |
 
 ### Navigation
 
-Quiet sticky top bar: name (scroll top) + anchors: Now, Projects, Experience, Writing, About. Resume as accent text button in nav. No hamburger theater on desktop; mobile: compact row or overflow menu with same anchors.
+Quiet sticky top bar: name (scroll top) + anchors: Now, Projects, Publications, Experience, Writing, About. Resume as accent text button in nav. No hamburger theater on desktop; mobile: compact row or overflow menu with same anchors.
 
 ---
 
 ## 6. Section-by-section layout
 
-Order is fixed.
+Order is fixed: Hero → Now → Stats → Projects → Publications → Experience → Writing → About → Footer.
 
 ### 6.1 Hero
 
@@ -166,7 +167,7 @@ Order is fixed.
 
 ### 6.4 Projects (`#projects`)
 
-- Before Experience (locked)
+- Before Publications, then Experience (locked)
 - Filter row: monospace chips from union of project tags (All + tags). Client state only
 - Cards collapsed: title, one-line blurb, tech chips, optional live/demo badge; Mnemo visually flagged (label or accent marker — not a second color; use weight / “Flagship” chip)
 - Expand: problem, approach, outcome, GitHub link, demo link if any
@@ -174,7 +175,15 @@ Order is fixed.
 - Default visible: **4** projects (Mnemo first via `featured` / `priority`); **Show more** reveals the rest (F1 pipeline, Chicago Crimes viz, Global Energy ETL, etc.)
 - Listed projects (content in `data/projects.ts`): Mnemo, TickerSense, TripTok, JOBHUNT, F1 pipeline, Chicago Crimes viz, Global Energy ETL
 
-### 6.5 Experience (`#experience`)
+### 6.5 Publications (`#publications`)
+
+- Between Projects and Experience (locked). Rationale: 3 peer-reviewed papers are proof of technical depth and do not fit as built software.
+- Simple list, newest first. No filters.
+- Each item: title, venue, date, one-line summary, external link labeled **Read paper**
+- Optional expand for a longer abstract (`abstract?: string[]`)
+- Hover raise on item shell (same card hover pattern as other cards)
+
+### 6.6 Experience (`#experience`)
 
 - Expandable rows (company, role, dates always visible)
 - Expand: engineering-forward bullets (pipelines, APIs, automation, production)
@@ -184,19 +193,19 @@ Order is fixed.
   - Google via Smollan — Strategy & Analytics Intern (Oct 2021–Apr 2022)
 - No logo farm; text-first
 
-### 6.6 Writing (`#writing`)
+### 6.7 Writing (`#writing`)
 
 - Simple cards: title, venue (Medium / Substack / LinkedIn), date, topic tags; click → external URL
 - Topics focus: Mnemo build, DSA, system design, LLD
 - Hover raise; no on-page article body in v1
 
-### 6.7 About (`#about`)
+### 6.8 About (`#about`)
 
 - Short honest block: pivot framing (see tone); 3+ years production shipping; fast learner; proof in the open
 - Profile photo here only (from `assets/IMG_0100.png` → `public/`), modest size beside or above copy — not a full-bleed portrait
 - No long biography essay
 
-### 6.8 Footer
+### 6.9 Footer
 
 - Email + socials (same set as hero)
 - © year Pratyush Agarwal
@@ -212,7 +221,7 @@ app/
   page.tsx            # composes sections
   globals.css         # tokens, reduced-motion, base
 components/
-  SiteHeader.tsx      # sticky nav + resume CTA
+  SiteHeader.tsx      # sticky nav + resume CTA; anchors: Now, Projects, Publications, Experience, Writing, About
   Hero.tsx
   ShippingLog.tsx     # feed + Show more; includes GitHubSlot
   GitHubSlot.tsx      # v1 placeholder shell for grid + commits
@@ -220,6 +229,8 @@ components/
   StatsStrip.tsx
   Projects.tsx        # filters + list + Show more
   ProjectCard.tsx     # expandable
+  Publications.tsx
+  PublicationCard.tsx # list item; optional abstract expand
   Experience.tsx
   ExperienceItem.tsx  # expandable
   Writing.tsx
@@ -232,6 +243,7 @@ components/
   ExternalLink.tsx
 data/
   projects.ts
+  publications.ts
   experience.ts
   writing.ts
   log.ts
@@ -326,6 +338,19 @@ export type Project = {
 ```
 
 ```ts
+// data/publications.ts
+export type Publication = {
+  id: string;
+  title: string;
+  venue: 'Elsevier' | 'IEEE' | 'Springer';
+  date: string;
+  summary: string;
+  abstract?: string[];
+  href: string;
+};
+```
+
+```ts
 // data/experience.ts
 export type ExperienceItem = {
   id: string;
@@ -415,6 +440,7 @@ Wire via Next.js App Router `metadata` / `openGraph` in `app/layout.tsx` (or `ge
 - Recruiter can answer “who / what shipped / where’s the resume” in under 30s without expanding anything
 - Eng manager can expand Mnemo + 2 log entries + one experience role and judge build ability
 - Shipping log is recognizably the signature; rest of page stays quiet
+- Section order on page and in nav: Now → Projects → Publications → Experience → Writing → About (Publications after Projects)
 - Lighthouse-accessible patterns for keyboard + reduced motion
 - Clean single-column mobile layout ships in v1
 - LinkedIn share shows correct title, description, and OG image

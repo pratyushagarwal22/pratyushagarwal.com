@@ -42,11 +42,12 @@ public/og.png
 | Shipping log entries (≥5, preferably 6–10) | Task 4 | Dates, titles, summaries, expand bodies |
 | Project blurbs + problem/approach/outcome + GitHub/demo URLs | Task 4 | Especially Mnemo, TickerSense |
 | Experience bullets (engineering-forward) | Task 4 | Three roles from design.md |
-| Writing list (title, venue, date, URL, topics) | Task 4 / 10 | Real post links only when published; else empty array → Task 10 profile fallback |
+| Writing list (title, venue, date, URL, topics) | Task 4 / 11 | Real post links only when published; else empty array → Task 11 profile fallback |
+| Publications list (title, venue, date, summary, href; optional abstract) | Task 4 | Authored in Task 4; UI wired in Task 10 |
 | Profile photo + resume | Task 3 | Already in `assets/` — copy into `public/` |
-| OG card approval | Task 12 | Name + one-liner on static `og.png`; confirm wording |
-| Favicon preference | Task 12 | Optional — default simple “PA” or mark if you don’t provide one |
-| Vercel + DNS | Task 15 | You own domain `pratyushagarwal.com` |
+| OG card approval | Task 13 | Name + one-liner on static `og.png`; confirm wording |
+| Favicon preference | Task 13 | Optional — default simple “PA” or mark if you don’t provide one |
+| Vercel + DNS | Task 16 | You own domain `pratyushagarwal.com` |
 
 ---
 
@@ -94,9 +95,9 @@ Expected: build succeeds with no type errors.
 
 **Steps:**
 - [ ] Skip-to-content link targeting `#main`
-- [ ] Sticky header: name → top; anchors Now, Projects, Experience, Writing, About; Resume accent control
+- [ ] Sticky header: name → top; anchors Now, Projects, Publications, Experience, Writing, About; Resume accent control
 - [ ] Footer: email, socials, copyright year
-- [ ] `main` with placeholder `<section id="now|projects|experience|writing|about">` and `SectionHeading`s
+- [ ] `main` with placeholder `<section id="now|projects|publications|experience|writing|about">` and `SectionHeading`s
 - [ ] Resume href points at `/pratyush-agarwal-resume.pdf` (file may 404 until Task 3 — acceptable; link present)
 
 **Verify:**
@@ -148,15 +149,16 @@ Expected: success; assets in output.
 **Goal:** All `data/*.ts` modules exist, typecheck, and hold real v1 content (no UI wiring required beyond optional compile check).
 
 **Files:**
-- Create: `data/site.ts`, `data/log.ts`, `data/stats.ts`, `data/skills.ts`, `data/projects.ts`, `data/experience.ts`, `data/writing.ts`
+- Create: `data/site.ts`, `data/log.ts`, `data/stats.ts`, `data/skills.ts`, `data/projects.ts`, `data/publications.ts`, `data/experience.ts`, `data/writing.ts`
 - Types exactly as design.md §8 (`source: 'manual' | 'github'` on log; v1 entries all `manual`)
 
-**Needs from you:** **Required** — real copy and URLs (or explicit approval of agent-drafted copy in-session). Especially: one-liner, about, ≥5 log entries, 7 projects, 3 experiences, writing links, project GitHub/demo URLs.
+**Needs from you:** **Required** — real copy and URLs (or explicit approval of agent-drafted copy in-session). Especially: one-liner, about, ≥5 log entries, 7 projects, 3 publications, 3 experiences, writing links, project GitHub/demo URLs.
 
 **Steps:**
 - [ ] Implement types + exports per design.md
 - [ ] Stats: five metrics from design.md §6.3
 - [ ] Projects: Mnemo `featured: true`, highest priority; include tech/tags for filters
+- [ ] Publications: newest first; title, venue, date, summary, href; optional abstract arrays (content for Task 10 UI)
 - [ ] Log: newest first; decorative `marker` strings (short hex-like); ≥5 entries
 - [ ] `skills.ts`: vocabulary only (no UI section)
 - [ ] Ensure `npx tsc --noEmit` / `npm run build` passes with data alone imported from a temporary import in `page.tsx` **or** leave unimported until Task 5 — prefer importing `site` into header/footer now to replace stubs
@@ -165,7 +167,7 @@ Expected: success; assets in output.
 ```bash
 npm run build
 ```
-Expected: success. Spot-check files: Mnemo present; three experience roles; five stats; log length ≥5.
+Expected: success. Spot-check files: Mnemo present; three publications; three experience roles; five stats; log length ≥5.
 
 **Done when:** Data is complete and typed; build green. Content gaps blocked on you are listed in the PR/session notes — do not invent fake GitHub URLs.
 
@@ -216,7 +218,7 @@ npm run build
 - [ ] `LogEntry`: date + marker (mono, muted, **not** selectable/copy-as-SHA) + type chip + title + summary; button expands body; `aria-expanded`
 - [ ] Timeline rule + accent markers
 - [ ] Show more/less after 5 entries
-- [ ] Client state only; CSS transitions; respect reduced-motion later in Task 13 (basic transition OK now)
+- [ ] Client state only; CSS transitions; respect reduced-motion later in Task 14 (basic transition OK now)
 
 **Verify:**
 ```bash
@@ -319,11 +321,44 @@ Browser: three rows; expand Kohler → bullets; order correct.
 npm run build
 ```
 
-**Done when:** Experience matches design §6.5.
+**Done when:** Experience matches design §6.6.
 
 ---
 
-### Task 10: Writing
+### Task 10: Publications section
+
+**Goal:** Render `data/publications.ts` as a newest-first list with external “Read paper” links and optional abstract expand; reuse hover-raise and (if abstract used) the expand pattern from other cards.
+
+**Ordering note:** Inserted after Experience (Task 9) and before Writing. Subsequent tasks renumbered 11–16 (formerly 10–15).
+
+**Files:**
+- Create: `components/Publications.tsx`, `components/PublicationCard.tsx`
+- Modify: `app/page.tsx` (section between Projects and Experience)
+- Read: `data/publications.ts` (content authored in Task 4)
+
+**Needs from you:** None beyond Task 4 publication entries and real paper URLs.
+
+**Steps:**
+- [ ] List newest first; no filters
+- [ ] Each item: title, venue, date, one-line summary, **Read paper** external link
+- [ ] Optional abstract expand when `abstract` is present; reuse expand pattern (`aria-expanded`)
+- [ ] Hover raise on item shell (same as other cards)
+
+**Verify:**
+```bash
+npm run dev
+```
+Browser: `#publications` sits after Projects and before Experience; three papers; newest first; each **Read paper** opens the external URL; abstract expand works if data includes abstracts.
+```bash
+npm run build
+```
+Expected: success.
+
+**Done when:** Publications match design §6.5; each paper links out; order correct; build passes.
+
+---
+
+### Task 11: Writing
 
 **Goal:** Writing section with hover-raise cards. Prefer real post cards when `data/writing.ts` has published articles; otherwise fall back to profile-level venue cards.
 
@@ -353,11 +388,11 @@ Browser: If posts in data → post cards open real URLs. If empty → three prof
 npm run build
 ```
 
-**Done when:** Writing matches design §6.6 or the approved empty-state fallback; no fabricated posts.
+**Done when:** Writing matches design §6.7 or the approved empty-state fallback; no fabricated posts.
 
 ---
 
-### Task 11: About
+### Task 12: About
 
 **Goal:** Confident pivot copy + profile photo via `next/image`.
 
@@ -381,11 +416,11 @@ Browser: `#about` shows photo + copy; photo not in hero.
 npm run build
 ```
 
-**Done when:** About matches design §6.7.
+**Done when:** About matches design §6.8.
 
 ---
 
-### Task 12: Metadata, OG image, favicon
+### Task 13: Metadata, OG image, favicon
 
 **Goal:** LinkedIn-ready sharing metadata and icons.
 
@@ -411,13 +446,13 @@ Open `http://localhost:3000/og.png` → card image loads. Tab shows favicon.
 ```bash
 npm run build
 ```
-Optional later: LinkedIn [Post Inspector](https://www.linkedin.com/post-inspector/) after deploy (Task 15).
+Optional later: LinkedIn [Post Inspector](https://www.linkedin.com/post-inspector/) after deploy (Task 16).
 
 **Done when:** Metadata matches design §10 Metadata subsection.
 
 ---
 
-### Task 13: Accessibility + reduced motion pass
+### Task 14: Accessibility + reduced motion pass
 
 **Goal:** Keyboard and `prefers-reduced-motion` meet design §9.
 
@@ -447,7 +482,7 @@ npm run build
 
 ---
 
-### Task 14: Mobile pass
+### Task 15: Mobile pass
 
 **Goal:** Clean single-column mobile ships (design §5 — in scope for v1).
 
@@ -474,7 +509,7 @@ npm run build
 
 ---
 
-### Task 15: Deploy checklist (Vercel + domain)
+### Task 16: Deploy checklist (Vercel + domain)
 
 **Goal:** Production on Vercel at `pratyushagarwal.com` with correct OG/PDF/assets.
 
@@ -525,13 +560,14 @@ Do not implement in any task: dark mode, GitHub API grid/commits, analytics, blo
 | Stats | 7 |
 | Projects filter/expand/show more | 8 |
 | Experience | 9 |
-| Writing | 10 |
-| About + photo | 11 |
-| Metadata / OG / favicon | 12 |
-| a11y + reduced motion | 13 |
-| Mobile v1 | 14 |
-| Vercel + domain | 15 |
-| No client fetch / static performance | Global + Tasks 1–15 |
+| Publications list + external links + optional abstract | 10 |
+| Writing | 11 |
+| About + photo | 12 |
+| Metadata / OG / favicon | 13 |
+| a11y + reduced motion | 14 |
+| Mobile v1 | 15 |
+| Vercel + domain | 16 |
+| No client fetch / static performance | Global + Tasks 1–16 |
 | Accent ink blue locked | Global + Task 1 |
 
-No open accent decision remains. Content-heavy gate is **Task 4** and OG approval in **Task 12**.
+No open accent decision remains. Content-heavy gate is **Task 4** and OG approval in **Task 13**.
