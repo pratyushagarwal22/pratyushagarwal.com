@@ -1,3 +1,4 @@
+import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -16,6 +17,7 @@ export default function Home() {
       <SiteHeader />
       <main id="main" className="mx-auto w-full max-w-[720px] flex-1 px-6 py-16">
         <div className="flex flex-col gap-16 sm:gap-24">
+          <Hero />
           {sections.map((section) => (
             <section
               key={section.id}
