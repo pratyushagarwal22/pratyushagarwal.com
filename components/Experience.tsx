@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { experience } from "@/data/experience";
-import { contentContainerClassName } from "./ContentContainer";
+import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
 import { ExperienceItem } from "./ExperienceItem";
 import { SectionHeading } from "./SectionHeading";
 import { ShowMoreButton } from "./ShowMoreButton";
@@ -23,7 +23,7 @@ export function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className={`${contentContainerClassName} scroll-mt-20`}
+      className={`${contentContainerClassName} ${sectionScrollMarginClassName}`}
     >
       <SectionHeading id="experience-heading">Experience</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

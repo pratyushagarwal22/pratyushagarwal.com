@@ -28,7 +28,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       >
         <div className="flex flex-wrap items-center gap-2">
           <h3
-            className={`font-body text-base text-text sm:text-[1.0625rem] ${
+            className={`min-w-0 break-words font-body text-base text-text sm:text-[1.0625rem] ${
               isFlagship ? "font-semibold" : "font-medium"
             }`}
           >
@@ -37,14 +37,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {isFlagship ? <Chip label="Flagship" variant="flagship" /> : null}
         </div>
 
-        <p className="mt-1.5 font-body text-sm leading-relaxed text-text-muted sm:text-base">
+        <p className="mt-1.5 break-words font-body text-sm leading-relaxed text-text-muted sm:text-base">
           {project.blurb}
         </p>
 
         {project.tech.length > 0 ? (
           <ul className="mt-3 flex list-none flex-wrap gap-1.5 p-0">
             {project.tech.map((tech) => (
-              <li key={tech}>
+              <li key={tech} className="max-w-full">
                 <Chip label={tech} />
               </li>
             ))}
@@ -77,12 +77,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             ) : null}
 
             {project.links.length > 0 ? (
-              <ul className="mt-3 flex list-none flex-wrap gap-x-4 gap-y-2 p-0">
+              <ul className="mt-3 flex list-none flex-wrap gap-x-4 gap-y-1 p-0">
                 {project.links.map((link) => (
                   <li key={link.href}>
                     <ExternalLink
                       href={link.href}
-                      className="font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       {link.label}
                     </ExternalLink>

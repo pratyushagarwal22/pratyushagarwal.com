@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <div id="top" className="flex min-h-full flex-col">
       <SiteHeader />
-      <main id="main" className="flex-1 py-16">
-        <div className="flex flex-col gap-16 sm:gap-24">
+      <main id="main" className="flex-1 py-10 sm:py-16">
+        <div className="flex flex-col gap-14 sm:gap-24">
           <Hero />
           <ShippingLog />
           <StatsStrip />

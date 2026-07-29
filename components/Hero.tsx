@@ -31,13 +31,13 @@ export function Hero() {
       className={`${contentContainerClassName} flex min-h-[calc((100svh-76px)*0.81)] flex-col justify-center pt-8 pb-10`}
     >
       <h1
-        className="font-display font-medium leading-[1.15] tracking-tight text-text"
-        style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 4rem)" }}
+        className="max-w-full break-words font-display font-medium leading-[1.15] tracking-tight text-text"
+        style={{ fontSize: "clamp(2rem, 5vw + 1rem, 4rem)" }}
       >
         {site.name}
       </h1>
 
-      <p className="mt-8 font-body text-lg leading-relaxed text-text sm:mt-10 sm:text-xl">
+      <p className="mt-8 max-w-full break-words font-body text-lg leading-relaxed text-text sm:mt-10 sm:text-xl">
         <OneLinerLine line={oneLinerLines[0]} muted={false} />
         {oneLinerLines.slice(1).map((line) => (
           <span key={line}>
@@ -57,7 +57,7 @@ export function Hero() {
         </a>
       </p>
 
-      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
+      <div className="mt-8 flex flex-col items-start gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
         <ExternalLink
           href={site.resumeHref}
           target="_blank"
@@ -76,7 +76,7 @@ export function Hero() {
         {email ? (
           <ExternalLink
             href={email.href}
-            className="inline-flex min-h-11 items-center justify-center font-body text-base font-medium text-text-muted underline-offset-4 hover:text-text hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="inline-flex min-h-11 max-w-full items-center justify-center break-all font-body text-base font-medium text-text-muted underline-offset-4 hover:text-text hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:break-normal"
           >
             hi@pratyushagarwal.com
           </ExternalLink>
@@ -84,14 +84,14 @@ export function Hero() {
       </div>
 
       <ul
-        className="mt-8 flex flex-wrap gap-x-5 gap-y-2 sm:mt-10"
+        className="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-1 sm:mt-10 sm:justify-start sm:gap-x-5 sm:gap-y-2"
         aria-label="Social links"
       >
         {socialLinks.map((social) => (
           <li key={social.id}>
             <ExternalLink
               href={social.href}
-              className="font-body text-sm text-text-muted hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex min-h-11 items-center font-body text-sm text-text-muted hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {social.label}
             </ExternalLink>

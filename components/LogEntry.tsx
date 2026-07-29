@@ -55,12 +55,12 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
   const [expanded, setExpanded] = useState(false);
   const panelId = useId();
   return (
-    <article className="relative grid grid-cols-[5.5rem_1fr] gap-x-3 sm:grid-cols-[7rem_1fr] sm:gap-x-4">
+    <article className="relative grid grid-cols-[4.75rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[7rem_1fr] sm:gap-x-4">
       {/* Left rail: date + decorative marker */}
-      <div className="relative flex flex-col items-end pt-1 pr-3 sm:pr-4">
+      <div className="relative flex flex-col items-end pt-1 pr-2 sm:pr-4">
         <time
           dateTime={entry.date}
-          className="font-mono text-xs text-text-muted sm:text-[0.8125rem]"
+          className="font-mono text-[0.6875rem] text-text-muted sm:text-[0.8125rem]"
         >
           {entry.date}
         </time>
@@ -91,15 +91,15 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
           aria-expanded={expanded}
           aria-controls={panelId}
           onClick={() => setExpanded((v) => !v)}
-          className="group w-full rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="group w-full rounded-sm py-1 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           <div className="flex flex-wrap items-center gap-2">
             <Chip label={entry.type} />
-            <h3 className="font-body text-base font-medium text-text group-hover:text-accent sm:text-[1.0625rem]">
+            <h3 className="min-w-0 break-words font-body text-base font-medium text-text group-hover:text-accent sm:text-[1.0625rem]">
               {entry.title}
             </h3>
           </div>
-          <p className="mt-1.5 font-body text-sm leading-relaxed text-text-muted sm:text-base">
+          <p className="mt-1.5 break-words font-body text-sm leading-relaxed text-text-muted sm:text-base">
             {entry.summary}
           </p>
         </button>
@@ -124,7 +124,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                 <p className="mt-3">
                   <ExternalLink
                     href={entry.href}
-                    className="font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     View Repo
                   </ExternalLink>

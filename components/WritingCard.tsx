@@ -17,10 +17,10 @@ export function WritingCard({ item }: WritingCardProps) {
         className="group block rounded-sm p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h3 className="font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
+          <h3 className="min-w-0 break-words font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
             {item.title}
           </h3>
-          <p className="font-body text-sm text-text-muted">
+          <p className="shrink-0 font-body text-sm text-text-muted">
             {item.venue} ·{" "}
             <time dateTime={item.date}>{item.date}</time>
           </p>
@@ -29,7 +29,7 @@ export function WritingCard({ item }: WritingCardProps) {
         {item.topics.length > 0 ? (
           <ul className="mt-3 flex list-none flex-wrap gap-1.5 p-0">
             {item.topics.map((topic) => (
-              <li key={topic}>
+              <li key={topic} className="max-w-full">
                 <Chip label={topic} />
               </li>
             ))}

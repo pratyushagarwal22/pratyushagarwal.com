@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { projects } from "@/data/projects";
 import { Chip } from "./Chip";
-import { contentContainerClassName } from "./ContentContainer";
+import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
 import { ProjectCard } from "./ProjectCard";
 import { SectionHeading } from "./SectionHeading";
 import { ShowMoreButton } from "./ShowMoreButton";
@@ -44,7 +44,7 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className={`${contentContainerClassName} scroll-mt-20`}
+      className={`${contentContainerClassName} ${sectionScrollMarginClassName}`}
     >
       <SectionHeading id="projects-heading">Projects</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">
@@ -54,7 +54,7 @@ export function Projects() {
       <div
         role="group"
         aria-label="Filter projects by tag"
-        className="mt-6 flex flex-wrap gap-2.5"
+        className="mt-6 flex flex-wrap gap-2"
       >
         {filterOptions.map((tag) => {
           const isActive = filter === tag;
@@ -64,7 +64,7 @@ export function Projects() {
               type="button"
               aria-pressed={isActive}
               onClick={() => selectFilter(tag)}
-              className="inline-flex min-h-11 items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex min-h-11 max-w-full items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <Chip
                 label={tag}

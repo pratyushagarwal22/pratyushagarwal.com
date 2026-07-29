@@ -2,7 +2,10 @@ import type { ReactNode } from "react";
 
 /** Single page content width — use on every main-column section. */
 export const contentContainerClassName =
-  "mx-auto w-full max-w-[900px] px-6";
+  "mx-auto w-full max-w-[900px] px-4 sm:px-6";
+
+/** Sticky header (~76px) + ~32px gap for in-page anchor jumps only. */
+export const sectionScrollMarginClassName = "scroll-mt-[6.75rem]";
 
 type ContentContainerProps = {
   children: ReactNode;

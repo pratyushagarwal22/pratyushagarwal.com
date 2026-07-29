@@ -1,6 +1,6 @@
 import { site } from "@/data/site";
 import { writing } from "@/data/writing";
-import { contentContainerClassName } from "./ContentContainer";
+import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
 import { ExternalLink } from "./ExternalLink";
 import { SectionHeading } from "./SectionHeading";
 import { VenueProfileCard, WritingCard } from "./WritingCard";
@@ -17,7 +17,7 @@ export function Writing() {
     <section
       id="writing"
       aria-labelledby="writing-heading"
-      className={`${contentContainerClassName} scroll-mt-20`}
+      className={`${contentContainerClassName} ${sectionScrollMarginClassName}`}
     >
       <SectionHeading id="writing-heading">Writing</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

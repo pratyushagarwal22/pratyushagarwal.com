@@ -22,7 +22,7 @@ export function Chip({ label, variant = "default", size = "sm" }: ChipProps) {
 
   return (
     <span
-      className={`inline-flex items-center rounded-sm border font-mono ${sizeClass} ${variantClass}`}
+      className={`inline-flex max-w-full items-center break-words rounded-sm border font-mono ${sizeClass} ${variantClass}`}
     >
       {label}
     </span>

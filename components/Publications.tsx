@@ -1,5 +1,5 @@
 import { publications } from "@/data/publications";
-import { contentContainerClassName } from "./ContentContainer";
+import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
 import { PublicationCard } from "./PublicationCard";
 import { SectionHeading } from "./SectionHeading";
 
@@ -9,7 +9,7 @@ export function Publications() {
     <section
       id="publications"
       aria-labelledby="publications-heading"
-      className={`${contentContainerClassName} scroll-mt-20`}
+      className={`${contentContainerClassName} ${sectionScrollMarginClassName}`}
     >
       <SectionHeading id="publications-heading">Publications</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

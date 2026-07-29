@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { site } from "@/data/site";
-import { contentContainerClassName } from "./ContentContainer";
+import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
 import { SectionHeading } from "./SectionHeading";
 
 /** Split at a sentence boundary for readability — words unchanged. */
@@ -22,23 +22,23 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className={`${contentContainerClassName} scroll-mt-20`}
+      className={`${contentContainerClassName} ${sectionScrollMarginClassName}`}
     >
       <SectionHeading id="about-heading">About</SectionHeading>
 
       <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
-        <div className="relative aspect-[3/4] w-[200px] shrink-0 overflow-hidden sm:w-[260px]">
+        <div className="relative mx-auto aspect-[3/4] w-[180px] shrink-0 overflow-hidden sm:mx-0 sm:w-[260px]">
           <Image
             src={site.profileImageSrc}
             alt="Pratyush Agarwal"
             fill
-            sizes="(max-width: 640px) 200px, 260px"
+            sizes="(max-width: 640px) 180px, 260px"
             className="scale-[1.7] object-cover object-[center_22%]"
           />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="space-y-4 font-body text-base leading-relaxed text-text">
+          <div className="space-y-4 break-words font-body text-base leading-relaxed text-text">
             {paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
@@ -52,7 +52,7 @@ export function About() {
               {site.education.map((item) => (
                 <li
                   key={item.line}
-                  className="font-body text-sm leading-relaxed text-text-muted sm:text-base"
+                  className="break-words font-body text-sm leading-relaxed text-text-muted sm:text-base"
                 >
                   {item.line}
                 </li>
