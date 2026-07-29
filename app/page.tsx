@@ -1,3 +1,4 @@
+import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -7,7 +8,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StatsStrip } from "@/components/StatsStrip";
 
 const sections = [
-  { id: "experience", title: "Experience" },
   { id: "writing", title: "Writing" },
   { id: "about", title: "About" },
 ] as const;
@@ -24,6 +24,8 @@ export default function Home() {
           </div>
           <StatsStrip />
           <Projects />
+          {/* #publications lands here in Task 10 (between Projects and Experience) */}
+          <Experience />
           <div className="flex w-full max-w-[720px] flex-col gap-16 sm:gap-24">
             {sections.map((section) => (
               <section
