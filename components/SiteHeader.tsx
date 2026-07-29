@@ -53,6 +53,8 @@ export function SiteHeader() {
             <li>
               <ExternalLink
                 href={site.resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="View resume (PDF)"
                 className="font-body text-[15px] font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >

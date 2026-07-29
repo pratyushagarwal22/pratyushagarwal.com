@@ -26,6 +26,7 @@ export const log: LogEntry[] = [
     body: [
       "Mnemo is a personal knowledge tool that starts as a Notion/Trello-style notes-and-kanban app and evolves into a semantic, graph-connected, agent-powered second brain. Two services: a TypeScript/NestJS API and a Python/FastAPI AI layer. Nine stacked milestones from CRUD to agentic AI, each with a design doc, plan, and learning write-up.",
     ],
+    href: "https://github.com/pratyushagarwal22/mnemo",
     source: "manual",
   },
   {

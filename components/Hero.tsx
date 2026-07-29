@@ -1,7 +1,7 @@
 import { site } from "@/data/site";
 import { ExternalLink } from "./ExternalLink";
 
-const [oneLinerLead, oneLinerRest] = site.oneLiner.split("\n");
+const oneLinerLines = site.oneLiner.split("\n");
 
 const socialLinks = site.socials.filter((social) => social.id !== "email");
 const email = site.socials.find((social) => social.id === "email");
@@ -17,13 +17,13 @@ export function Hero() {
       </h1>
 
       <p className="font-body text-lg leading-relaxed text-text sm:text-xl">
-        <span className="text-text">{oneLinerLead}</span>
-        {oneLinerRest ? (
-          <>
+        <span className="text-text">{oneLinerLines[0]}</span>
+        {oneLinerLines.slice(1).map((line) => (
+          <span key={line}>
             <br />
-            <span className="text-text-muted">{oneLinerRest}</span>
-          </>
-        ) : null}
+            <span className="text-text-muted">{line}</span>
+          </span>
+        ))}
       </p>
 
       <p className="font-body text-base text-text-muted sm:text-lg">
@@ -39,10 +39,12 @@ export function Hero() {
       <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
         <ExternalLink
           href={site.resumeHref}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="View resume (PDF)"
           className="inline-flex min-h-11 items-center justify-center rounded-sm bg-accent px-5 py-2.5 font-body text-base font-medium text-white hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          View resume
+          Resume
         </ExternalLink>
         <a
           href="#now"
@@ -55,7 +57,7 @@ export function Hero() {
             href={email.href}
             className="inline-flex min-h-11 items-center justify-center font-body text-base font-medium text-text-muted underline-offset-4 hover:text-text hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            Email
+            hi@pratyushagarwal.com
           </ExternalLink>
         ) : null}
       </div>
