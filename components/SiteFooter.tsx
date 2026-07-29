@@ -6,7 +6,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-[720px] flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-4 px-8 py-10 sm:flex-row sm:items-center sm:justify-between">
         <nav aria-label="Footer">
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             {site.socials.map((social) => (

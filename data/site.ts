@@ -7,6 +7,7 @@ export type SocialLink = {
 /** Minimal stub for Task 2 shell. Full site content lands in Task 4. */
 export const site = {
   name: "Pratyush Agarwal",
+  shortName: "Pratyush",
   resumeHref: "/pratyush-agarwal-resume.pdf",
   socials: [
     {

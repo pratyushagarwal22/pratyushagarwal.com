@@ -31,12 +31,12 @@ export function SiteHeader() {
         scrolled ? "shadow-[0_1px_3px_rgba(0,0,0,0.08)]" : "shadow-none"
       }`}
     >
-      <div className="mx-auto flex h-[76px] w-full max-w-[720px] items-center justify-between gap-6 px-6">
+      <div className="mx-auto flex h-[76px] w-full max-w-[1200px] items-center justify-between gap-6 px-8">
         <a
           href="#top"
           className="shrink-0 font-display text-lg text-text hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          {site.name}
+          {site.shortName}
         </a>
         <nav aria-label="Primary" className="shrink-0">
           <ul className="flex items-center gap-x-5 sm:gap-x-6">
