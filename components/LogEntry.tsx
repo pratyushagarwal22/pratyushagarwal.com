@@ -1,7 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
-import type { LogEntry as LogEntryData } from "@/data/log";
+import { Fragment, useId, useState, type ReactNode } from "react";
+import type { LogEntry as LogEntryData, LogInlineLink } from "@/data/log";
 import { Chip } from "./Chip";
 import { ExternalLink } from "./ExternalLink";
 
@@ -11,14 +11,53 @@ type LogEntryProps = {
   isLast?: boolean;
 };
 
+function renderBodyWithInlineLinks(
+  text: string,
+  inlineLinks: LogInlineLink[] | undefined,
+): ReactNode {
+  if (!inlineLinks || inlineLinks.length === 0) {
+    return text;
+  }
+
+  const labels = inlineLinks.map((link) => link.label);
+  const pattern = new RegExp(
+    `(${labels.map((label) => escapeRegExp(label)).join("|")})`,
+    "g",
+  );
+  const hrefByLabel = new Map(
+    inlineLinks.map((link) => [link.label, link.href]),
+  );
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) => {
+    const href = hrefByLabel.get(part);
+    if (!href) {
+      return <Fragment key={index}>{part}</Fragment>;
+    }
+
+    return (
+      <ExternalLink
+        key={index}
+        href={href}
+        className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        {part}
+      </ExternalLink>
+    );
+  });
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export function LogEntry({ entry, isLast = false }: LogEntryProps) {
   const [expanded, setExpanded] = useState(false);
   const panelId = useId();
-
   return (
-    <article className="relative grid grid-cols-[5.5rem_1fr] gap-x-3 sm:grid-cols-[6.5rem_1fr] sm:gap-x-4">
+    <article className="relative grid grid-cols-[5.5rem_1fr] gap-x-3 sm:grid-cols-[7rem_1fr] sm:gap-x-4">
       {/* Left rail: date + decorative marker */}
-      <div className="relative flex flex-col items-end pt-1 pr-1">
+      <div className="relative flex flex-col items-end pt-1 pr-3 sm:pr-4">
         <time
           dateTime={entry.date}
           className="font-mono text-xs text-text-muted sm:text-[0.8125rem]"
@@ -77,7 +116,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                   key={i}
                   className="font-body text-sm leading-relaxed text-text sm:text-base [&:not(:first-child)]:mt-2"
                 >
-                  {paragraph}
+                  {renderBodyWithInlineLinks(paragraph, entry.inlineLinks)}
                 </p>
               ))}
               {entry.href ? (
@@ -86,7 +125,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                     href={entry.href}
                     className="font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
-                    View link
+                    View Repo
                   </ExternalLink>
                 </p>
               ) : null}

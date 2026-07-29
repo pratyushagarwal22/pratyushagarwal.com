@@ -13,7 +13,7 @@ export function Publications() {
     >
       <SectionHeading id="publications-heading">Publications</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">
-        Peer-reviewed papers — expand for the abstract, or read the full paper.
+        Peer-reviewed papers — click to expand for the abstract.
       </p>
 
       <ul className="mt-8 flex list-none flex-col gap-4 p-0">

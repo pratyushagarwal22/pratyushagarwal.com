@@ -58,16 +58,21 @@ export function ExperienceItem({ item }: ExperienceItemProps) {
         style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
       >
         <div className="overflow-hidden">
-          <ul className="list-disc space-y-2 border-t border-border py-3 pr-4 pb-4 pl-8 sm:pr-5 sm:pb-5 sm:pl-9">
-            {item.bullets.map((bullet) => (
-              <li
-                key={bullet}
-                className="font-body text-sm leading-relaxed text-text sm:text-base"
-              >
-                {bullet}
-              </li>
-            ))}
-          </ul>
+          <div className="border-t border-border px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+            <p className="font-body text-xs font-medium uppercase tracking-wide text-text-muted">
+              Key responsibilities
+            </p>
+            <ul className="mt-2 list-disc space-y-2 pl-5">
+              {item.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  className="font-body text-sm leading-relaxed text-text sm:text-base"
+                >
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </article>

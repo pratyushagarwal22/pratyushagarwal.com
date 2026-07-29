@@ -7,7 +7,7 @@ import { ExperienceItem } from "./ExperienceItem";
 import { SectionHeading } from "./SectionHeading";
 import { ShowMoreButton } from "./ShowMoreButton";
 
-const DEFAULT_VISIBLE = 3;
+const DEFAULT_VISIBLE = 4;
 
 export function Experience() {
   const [showAll, setShowAll] = useState(false);
@@ -27,7 +27,7 @@ export function Experience() {
     >
       <SectionHeading id="experience-heading">Experience</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">
-        Roles and internships — expand for engineering-forward detail.
+        Roles and internships — click to expand for detail.
       </p>
 
       <ul className="mt-8 flex list-none flex-col gap-4 p-0">

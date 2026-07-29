@@ -18,6 +18,7 @@ export const experience: ExperienceItem[] = [
     location: "Champaign, IL",
     start: "Jun 2025",
     end: "May 2026",
+    summary: "Digital Transformation Team",
     tech: [
       "Azure Data Factory",
       "Databricks",
@@ -115,7 +116,7 @@ export const experience: ExperienceItem[] = [
     id: "oneplus",
     company: "OnePlus",
     role: "Marketing Specialist Intern",
-    location: "Bengaluru, India (Remote)",
+    location: "Bangalore, India (Remote)",
     start: "Sep 2020",
     end: "Feb 2021",
     tech: [

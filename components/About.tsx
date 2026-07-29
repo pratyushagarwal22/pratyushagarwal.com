@@ -27,21 +27,38 @@ export function About() {
       <SectionHeading id="about-heading">About</SectionHeading>
 
       <div className="mt-8 flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
-        <div className="shrink-0">
+        <div className="relative aspect-[3/4] w-[200px] shrink-0 overflow-hidden sm:w-[260px]">
           <Image
             src={site.profileImageSrc}
             alt="Pratyush Agarwal"
-            width={240}
-            height={240}
-            className="h-auto w-[180px] sm:w-[220px]"
-            sizes="220px"
+            fill
+            sizes="(max-width: 640px) 200px, 260px"
+            className="scale-[1.7] object-cover object-[center_22%]"
           />
         </div>
 
-        <div className="min-w-0 flex-1 space-y-4 font-body text-base leading-relaxed text-text">
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-          ))}
+        <div className="min-w-0 flex-1">
+          <div className="space-y-4 font-body text-base leading-relaxed text-text">
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className="mt-6">
+            <p className="font-body text-xs font-medium uppercase tracking-wide text-text-muted">
+              Education
+            </p>
+            <ul className="mt-2 list-none space-y-1.5 p-0">
+              {site.education.map((item) => (
+                <li
+                  key={item.line}
+                  className="font-body text-sm leading-relaxed text-text-muted sm:text-base"
+                >
+                  {item.line}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

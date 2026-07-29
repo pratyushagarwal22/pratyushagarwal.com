@@ -1,5 +1,10 @@
 export type LogEntryType = "shipped" | "wrote" | "built" | "milestone";
 
+export type LogInlineLink = {
+  label: string;
+  href: string;
+};
+
 export type LogEntry = {
   id: string;
   date: string;
@@ -9,6 +14,8 @@ export type LogEntry = {
   summary: string;
   body: string[];
   href?: string;
+  /** Substrings in body paragraphs to turn into inline links. */
+  inlineLinks?: LogInlineLink[];
   source: "manual" | "github";
   repo?: string;
   sha?: string;
@@ -55,7 +62,13 @@ export const log: LogEntry[] = [
     body: [
       "One workspace per ticker: filings, fundamentals, charts, governance, and TickerChat, an assistant that answers from official SEC filings instead of guessing. Deployed on Vercel and Render. Live at project-tickersense.vercel.app.",
     ],
-    href: "https://project-tickersense.vercel.app",
+    href: "https://github.com/pratyushagarwal22/tickersense",
+    inlineLinks: [
+      {
+        label: "project-tickersense.vercel.app",
+        href: "https://project-tickersense.vercel.app",
+      },
+    ],
     source: "manual",
   },
 ];

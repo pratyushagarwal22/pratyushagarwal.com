@@ -7,10 +7,28 @@ const oneLinerLines = site.oneLiner.split("\n");
 const socialLinks = site.socials.filter((social) => social.id !== "email");
 const email = site.socials.find((social) => social.id === "email");
 
+function OneLinerLine({ line, muted }: { line: string; muted: boolean }) {
+  const proofPrefix = "Proof";
+  const hasProofLead = muted && line.startsWith(proofPrefix);
+
+  return (
+    <span className={muted ? "text-text-muted" : "text-text"}>
+      {hasProofLead ? (
+        <>
+          <span className="font-bold text-accent">{proofPrefix}</span>
+          {line.slice(proofPrefix.length)}
+        </>
+      ) : (
+        line
+      )}
+    </span>
+  );
+}
+
 export function Hero() {
   return (
     <header
-      className={`${contentContainerClassName} flex flex-col gap-6`}
+      className={`${contentContainerClassName} flex min-h-[calc((100svh-76px)*0.81)] flex-col justify-center pt-8 pb-10`}
     >
       <h1
         className="font-display font-medium leading-[1.15] tracking-tight text-text"
@@ -19,17 +37,17 @@ export function Hero() {
         {site.name}
       </h1>
 
-      <p className="font-body text-lg leading-relaxed text-text sm:text-xl">
-        <span className="text-text">{oneLinerLines[0]}</span>
+      <p className="mt-8 font-body text-lg leading-relaxed text-text sm:mt-10 sm:text-xl">
+        <OneLinerLine line={oneLinerLines[0]} muted={false} />
         {oneLinerLines.slice(1).map((line) => (
           <span key={line}>
             <br />
-            <span className="text-text-muted">{line}</span>
+            <OneLinerLine line={line} muted />
           </span>
         ))}
       </p>
 
-      <p className="font-body text-base text-text-muted sm:text-lg">
+      <p className="mt-8 font-body text-base text-text-muted sm:mt-10 sm:text-lg">
         Currently building{" "}
         <a
           href={site.currentlyBuilding.href}
@@ -39,7 +57,7 @@ export function Hero() {
         </a>
       </p>
 
-      <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
         <ExternalLink
           href={site.resumeHref}
           target="_blank"
@@ -65,7 +83,10 @@ export function Hero() {
         ) : null}
       </div>
 
-      <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-2" aria-label="Social links">
+      <ul
+        className="mt-8 flex flex-wrap gap-x-5 gap-y-2 sm:mt-10"
+        aria-label="Social links"
+      >
         {socialLinks.map((social) => (
           <li key={social.id}>
             <ExternalLink

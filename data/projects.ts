@@ -34,7 +34,7 @@ export const projects: Project[] = [
       "PostgreSQL",
       "Docker",
     ],
-    tags: ["Backend", "AI", "Systems"],
+    tags: ["Backend", "AI", "Systems", "Full-Stack"],
     links: [
       {
         label: "GitHub",

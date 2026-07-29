@@ -48,13 +48,13 @@ export function Projects() {
     >
       <SectionHeading id="projects-heading">Projects</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">
-        Selected builds — filter by tag, expand for problem / approach / outcome.
+        Selected builds — filter by tag, click to expand.
       </p>
 
       <div
         role="group"
         aria-label="Filter projects by tag"
-        className="mt-6 flex flex-wrap gap-2"
+        className="mt-6 flex flex-wrap gap-2.5"
       >
         {filterOptions.map((tag) => {
           const isActive = filter === tag;
@@ -66,7 +66,11 @@ export function Projects() {
               onClick={() => selectFilter(tag)}
               className="inline-flex min-h-11 items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <Chip label={tag} variant={isActive ? "active" : "default"} />
+              <Chip
+                label={tag}
+                size="md"
+                variant={isActive ? "active" : "default"}
+              />
             </button>
           );
         })}

@@ -4,6 +4,10 @@ export type SocialLink = {
   href: string;
 };
 
+export type EducationItem = {
+  line: string;
+};
+
 export type SiteContent = {
   name: string;
   shortName: string;
@@ -14,6 +18,7 @@ export type SiteContent = {
   profileImageSrc: string;
   socials: SocialLink[];
   about: string;
+  education: EducationItem[];
 };
 
 export const site: SiteContent = {
@@ -53,5 +58,13 @@ export const site: SiteContent = {
     },
   ],
   about:
-    "I spent three years working with data across Kohler, Apna, and Google, building pipelines, automation, and systems that teams relied on every day. Somewhere along the way I realized the parts I loved most were the software parts: designing APIs, shipping products, watching people use what I built. So I'm going all in on software engineering. I don't have years of a traditional SWE title behind me, but I have production experience, I learn fast, and I'm building the proof in the open: every project public, every milestone logged, every lesson written up. If you want to see how I work, it's all here.",
+    "I spent three years working with data across Kohler, Apna, and Google, building pipelines, automation, and systems that teams relied on every day. Somewhere along the way I realized the parts I loved most were the software parts: designing APIs, shipping products, watching people use what I built. So I'm going all in on software engineering. I don't have years of a traditional SWE / SDE / Product Engineer title behind me, but I have production experience, I learn fast, and I'm building the proof in the open: every project public, every milestone logged, every lesson written up. If you want to see how I work, it's all here.",
+  education: [
+    {
+      line: "M.S. in Information Management — University of Illinois Urbana-Champaign (2024–2026)",
+    },
+    {
+      line: "B.Tech in Computer and Communication Engineering — Manipal University Jaipur (2018–2022)",
+    },
+  ],
 };

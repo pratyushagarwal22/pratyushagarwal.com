@@ -23,7 +23,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://pratyushagarwal.com"),
-  title: "Pratyush Agarwal — Building software in public",
+  title: "Pratyush Agarwal",
   description:
     "Software engineer building in public. Three years shipping data systems, now all in on software engineering. Proof, not promises, one commit at a time.",
   openGraph: {

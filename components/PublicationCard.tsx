@@ -16,41 +16,29 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 
   return (
     <article className="rounded-sm border border-border bg-surface transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-[0_4px_12px_rgba(20,20,20,0.06)]">
-      <div className="p-4 sm:p-5">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h3 className="font-body text-base font-medium text-text sm:text-[1.0625rem]">
-            {publication.title}
-          </h3>
-          <p className="font-body text-sm text-text-muted">
-            {publication.venue} ·{" "}
-            <time dateTime={publication.date}>{publication.date}</time>
-          </p>
+      {hasAbstract ? (
+        <button
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={panelId}
+          onClick={() => setExpanded((v) => !v)}
+          className="group w-full rounded-sm p-4 pb-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5 sm:pb-0"
+        >
+          <PublicationHeader publication={publication} />
+        </button>
+      ) : (
+        <div className="p-4 pb-0 sm:p-5 sm:pb-0">
+          <PublicationHeader publication={publication} />
         </div>
+      )}
 
-        <p className="mt-1.5 font-body text-sm leading-relaxed text-text-muted sm:text-base">
-          {publication.summary}
-        </p>
-
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <ExternalLink
-            href={publication.href}
-            className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            Read paper
-          </ExternalLink>
-
-          {hasAbstract ? (
-            <button
-              type="button"
-              aria-expanded={expanded}
-              aria-controls={panelId}
-              onClick={() => setExpanded((v) => !v)}
-              className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              {expanded ? "Hide abstract" : "Read abstract"}
-            </button>
-          ) : null}
-        </div>
+      <div className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+        <ExternalLink
+          href={publication.href}
+          className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Read paper
+        </ExternalLink>
       </div>
 
       {hasAbstract ? (
@@ -74,5 +62,25 @@ export function PublicationCard({ publication }: PublicationCardProps) {
         </div>
       ) : null}
     </article>
+  );
+}
+
+function PublicationHeader({ publication }: { publication: Publication }) {
+  return (
+    <>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <h3 className="font-body text-base font-medium text-text sm:text-[1.0625rem]">
+          {publication.title}
+        </h3>
+        <p className="font-body text-sm text-text-muted">
+          {publication.venue} ·{" "}
+          <time dateTime={publication.date}>{publication.date}</time>
+        </p>
+      </div>
+
+      <p className="mt-1.5 font-body text-sm leading-relaxed text-text-muted sm:text-base">
+        {publication.summary}
+      </p>
+    </>
   );
 }
