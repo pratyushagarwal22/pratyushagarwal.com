@@ -1,9 +1,8 @@
-import { contentContainerClassName } from "@/components/ContentContainer";
+import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { Publications } from "@/components/Publications";
-import { SectionHeading } from "@/components/SectionHeading";
 import { ShippingLog } from "@/components/ShippingLog";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -23,13 +22,7 @@ export default function Home() {
           <Publications />
           <Experience />
           <Writing />
-          <section
-            id="about"
-            aria-labelledby="about-heading"
-            className={`${contentContainerClassName} scroll-mt-20`}
-          >
-            <SectionHeading id="about-heading">About</SectionHeading>
-          </section>
+          <About />
         </div>
       </main>
       <SiteFooter />
