@@ -31,6 +31,3 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Local-only for now (remove this line when ready to commit assets)
-assets/
