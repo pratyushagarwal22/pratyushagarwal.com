@@ -1,6 +1,7 @@
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
+import { Publications } from "@/components/Publications";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ShippingLog } from "@/components/ShippingLog";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -24,7 +25,7 @@ export default function Home() {
           </div>
           <StatsStrip />
           <Projects />
-          {/* #publications lands here in Task 10 (between Projects and Experience) */}
+          <Publications />
           <Experience />
           <div className="flex w-full max-w-[720px] flex-col gap-16 sm:gap-24">
             {sections.map((section) => (
