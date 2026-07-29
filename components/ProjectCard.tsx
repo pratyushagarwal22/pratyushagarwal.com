@@ -54,9 +54,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {linkAffordance ? (
           <p className="mt-3 font-body text-sm text-text-muted">
             {linkAffordance}
-            <span className="sr-only">
-              {expanded ? "" : " — expand for links"}
-            </span>
           </p>
         ) : null}
       </button>
