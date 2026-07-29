@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { log } from "@/data/log";
+import { contentContainerClassName } from "./ContentContainer";
 import { GitHubSlot } from "./GitHubSlot";
 import { LogEntry } from "./LogEntry";
 import { SectionHeading } from "./SectionHeading";
@@ -21,7 +22,7 @@ export function ShippingLog() {
     <section
       id="now"
       aria-labelledby="now-heading"
-      className="scroll-mt-20"
+      className={`${contentContainerClassName} scroll-mt-20`}
     >
       <SectionHeading id="now-heading">Now</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

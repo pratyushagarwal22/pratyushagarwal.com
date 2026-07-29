@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { projects } from "@/data/projects";
 import { Chip } from "./Chip";
+import { contentContainerClassName } from "./ContentContainer";
 import { ProjectCard } from "./ProjectCard";
 import { SectionHeading } from "./SectionHeading";
 import { ShowMoreButton } from "./ShowMoreButton";
@@ -10,7 +11,6 @@ import { ShowMoreButton } from "./ShowMoreButton";
 const DEFAULT_VISIBLE = 4;
 const ALL = "All";
 
-/** Content column: max-w-[900px] (design §5 projects/stats band; matches StatsStrip). */
 export function Projects() {
   const [filter, setFilter] = useState(ALL);
   const [showAll, setShowAll] = useState(false);
@@ -44,7 +44,7 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="w-full max-w-[900px] scroll-mt-20"
+      className={`${contentContainerClassName} scroll-mt-20`}
     >
       <SectionHeading id="projects-heading">Projects</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

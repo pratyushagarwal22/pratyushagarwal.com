@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { experience } from "@/data/experience";
+import { contentContainerClassName } from "./ContentContainer";
 import { ExperienceItem } from "./ExperienceItem";
 import { SectionHeading } from "./SectionHeading";
 import { ShowMoreButton } from "./ShowMoreButton";
 
 const DEFAULT_VISIBLE = 3;
 
-/** Content column: max-w-[720px] (design §5 text-heavy band). */
 export function Experience() {
   const [showAll, setShowAll] = useState(false);
 
@@ -23,7 +23,7 @@ export function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="w-full max-w-[720px] scroll-mt-20"
+      className={`${contentContainerClassName} scroll-mt-20`}
     >
       <SectionHeading id="experience-heading">Experience</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">

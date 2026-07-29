@@ -1,4 +1,5 @@
 import { Experience } from "@/components/Experience";
+import { contentContainerClassName } from "@/components/ContentContainer";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { Publications } from "@/components/Publications";
@@ -17,30 +18,26 @@ export default function Home() {
   return (
     <div id="top" className="flex min-h-full flex-col">
       <SiteHeader />
-      <main id="main" className="mx-auto w-full max-w-[900px] flex-1 px-6 py-16">
+      <main id="main" className="flex-1 py-16">
         <div className="flex flex-col gap-16 sm:gap-24">
           <Hero />
-          <div className="w-full max-w-[720px]">
-            <ShippingLog />
-          </div>
+          <ShippingLog />
           <StatsStrip />
           <Projects />
           <Publications />
           <Experience />
-          <div className="flex w-full max-w-[720px] flex-col gap-16 sm:gap-24">
-            {sections.map((section) => (
-              <section
-                key={section.id}
-                id={section.id}
-                aria-labelledby={`${section.id}-heading`}
-                className="scroll-mt-20"
-              >
-                <SectionHeading id={`${section.id}-heading`}>
-                  {section.title}
-                </SectionHeading>
-              </section>
-            ))}
-          </div>
+          {sections.map((section) => (
+            <section
+              key={section.id}
+              id={section.id}
+              aria-labelledby={`${section.id}-heading`}
+              className={`${contentContainerClassName} scroll-mt-20`}
+            >
+              <SectionHeading id={`${section.id}-heading`}>
+                {section.title}
+              </SectionHeading>
+            </section>
+          ))}
         </div>
       </main>
       <SiteFooter />

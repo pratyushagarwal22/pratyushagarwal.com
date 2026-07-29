@@ -1,10 +1,11 @@
 import { stats } from "@/data/stats";
+import { contentContainerClassName } from "./ContentContainer";
 
 export function StatsStrip() {
   return (
     <section
       aria-label="Key stats"
-      className="w-full max-w-[900px] border-y border-border py-8"
+      className={`${contentContainerClassName} border-y border-border py-8`}
     >
       <dl className="grid grid-cols-2 items-start gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map((stat) => (
