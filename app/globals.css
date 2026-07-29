@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Design tokens — docs/design.md §3 */
+:root {
+  --color-bg: #fafaf9;
+  --color-surface: #ffffff;
+  --color-text: #141414;
+  --color-text-muted: #5c5c5c;
+  --color-border: #e4e4e4;
+  --color-border-strong: #cfcfcf;
+  --color-accent: #1e4e8c;
+  --color-accent-hover: #163a6b;
+  --color-chip-bg: #f0f0ef;
+  --color-chip-text: #3d3d3d;
+}
+
+@theme inline {
+  --color-bg: #fafaf9;
+  --color-surface: #ffffff;
+  --color-text: #141414;
+  --color-text-muted: #5c5c5c;
+  --color-border: #e4e4e4;
+  --color-border-strong: #cfcfcf;
+  --color-accent: #1e4e8c;
+  --color-accent-hover: #163a6b;
+  --color-chip-bg: #f0f0ef;
+  --color-chip-text: #3d3d3d;
+  --font-display: var(--font-newsreader);
+  --font-body: var(--font-source-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-source-sans), ui-sans-serif, sans-serif;
+  line-height: 1.625;
+}
