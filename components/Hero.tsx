@@ -8,7 +8,7 @@ const email = site.socials.find((social) => social.id === "email");
 
 export function Hero() {
   return (
-    <header className="flex flex-col gap-6">
+    <header className="flex w-full max-w-[900px] flex-col gap-6">
       <h1
         className="font-display font-medium leading-[1.15] tracking-tight text-text"
         style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 4rem)" }}

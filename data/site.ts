@@ -21,7 +21,7 @@ export const site: SiteContent = {
   shortName: "Pratyush",
   title: "Pratyush Agarwal — Building software in public",
   oneLiner:
-    "I like building things people actually use.\nThree years shipping data systems in production, now all in on software engineering. Proof, not promises, one commit at a time.",
+    "I like building things people actually use.\nThree years shipping data systems in production, now all in on software engineering.\nProof, not promises, one commit at a time.",
   currentlyBuilding: { name: "Mnemo", href: "#projects" },
   resumeHref: "/pratyush-agarwal-resume.pdf",
   profileImageSrc: "/profile.png",
