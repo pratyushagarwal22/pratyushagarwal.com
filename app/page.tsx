@@ -1,5 +1,5 @@
-import { Experience } from "@/components/Experience";
 import { contentContainerClassName } from "@/components/ContentContainer";
+import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { Publications } from "@/components/Publications";
@@ -8,11 +8,7 @@ import { ShippingLog } from "@/components/ShippingLog";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { StatsStrip } from "@/components/StatsStrip";
-
-const sections = [
-  { id: "writing", title: "Writing" },
-  { id: "about", title: "About" },
-] as const;
+import { Writing } from "@/components/Writing";
 
 export default function Home() {
   return (
@@ -26,18 +22,14 @@ export default function Home() {
           <Projects />
           <Publications />
           <Experience />
-          {sections.map((section) => (
-            <section
-              key={section.id}
-              id={section.id}
-              aria-labelledby={`${section.id}-heading`}
-              className={`${contentContainerClassName} scroll-mt-20`}
-            >
-              <SectionHeading id={`${section.id}-heading`}>
-                {section.title}
-              </SectionHeading>
-            </section>
-          ))}
+          <Writing />
+          <section
+            id="about"
+            aria-labelledby="about-heading"
+            className={`${contentContainerClassName} scroll-mt-20`}
+          >
+            <SectionHeading id="about-heading">About</SectionHeading>
+          </section>
         </div>
       </main>
       <SiteFooter />
