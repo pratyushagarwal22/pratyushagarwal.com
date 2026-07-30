@@ -114,6 +114,69 @@ export const projects: Project[] = [
     priority: 4,
   },
   {
+    id: "lead-management-system",
+    title: "Lead Management System",
+    blurb:
+      "Full-stack lead-intake system with a public resume-upload form, a JWT-guarded reviewer dashboard, and automated email, built on strict backend layering.",
+    description: [],
+    problem:
+      "A lead-intake workflow needs to take a prospect from a public form all the way to a reviewer's guarded dashboard — persisting the lead, storing the resume, emailing both sides, and tracking status — without the codebase becoming a tangle that resists future change.",
+    approach:
+      "FastAPI backend in strict layers (thin routers, services for logic, repositories for the only DB access) with email, file storage, and auth behind swappable interfaces. Next.js App Router frontend with a JWT-guarded internal dashboard. PostgreSQL via SQLAlchemy and Alembic, a DB-level enum for lead state, and the whole system, database, mail server, API, and web app, brought up with one Docker Compose command with health gating and auto-run migrations.",
+    outcome:
+      "One-command runtime with reproducible clean demos. Found and fixed a timing-based user-enumeration side channel in the login flow, and backed the project with ~1,100 lines of tests against a real Postgres database.",
+    tech: [
+      "Python",
+      "FastAPI",
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Docker",
+      "JWT",
+      "REST APIs",
+    ],
+    tags: ["Full-Stack", "Backend", "Systems"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/pratyushagarwal22/lead-management-system",
+      },
+    ],
+    priority: 5,
+  },
+  {
+    id: "stripe-subscription-integration",
+    title: "Stripe Subscription Integration",
+    blurb:
+      "A correct, secure $10/month subscription flow for a mock SaaS product using Stripe hosted Checkout and signature-verified webhooks.",
+    description: [],
+    problem:
+      "Payment integrations are easy to get subtly wrong: trusting the success redirect instead of the signed event, leaving webhook endpoints spoofable, or hardcoding keys so test-to-live is a code change. The goal was a production-shaped Stripe integration a solo developer could actually ship.",
+    approach:
+      "Stripe hosted Checkout so card details never touch the app's servers. Next.js frontend redirects to Stripe's page; a FastAPI backend creates the subscription-mode session and receives webhooks. The signed webhook, not the success redirect, is treated as the source of truth for granting access, with every webhook signature verified and bad payloads rejected before handling. All Stripe keys live in environment variables, making test-to-live a config change, not a code change.",
+    outcome:
+      "A minimal, secure, production-shaped integration. Documented the full local testing loop with the Stripe CLI, including the localhost vs 127.0.0.1 same-origin gotcha.",
+    tech: [
+      "Python",
+      "FastAPI",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Stripe API",
+      "Webhooks",
+      "REST APIs",
+    ],
+    tags: ["Full-Stack", "Backend"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/pratyushagarwal22/llama-inc",
+      },
+    ],
+    priority: 6,
+  },
+  {
     id: "f1-race-weekend",
     title: "F1 Race Weekend Data Pipeline",
     blurb:
@@ -131,7 +194,7 @@ export const projects: Project[] = [
         href: "https://github.com/pratyushagarwal22/F1_Projects",
       },
     ],
-    priority: 5,
+    priority: 7,
   },
   {
     id: "chicago-crimes",
@@ -151,7 +214,7 @@ export const projects: Project[] = [
         href: "https://huggingface.co/spaces/pratyushagarwal/Project_FP3",
       },
     ],
-    priority: 6,
+    priority: 8,
   },
   {
     id: "global-energy",
@@ -171,6 +234,6 @@ export const projects: Project[] = [
         href: "https://github.com/pratyushagarwal22/global-energy-etl-bi-dashboard",
       },
     ],
-    priority: 7,
+    priority: 9,
   },
 ];
