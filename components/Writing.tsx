@@ -39,6 +39,7 @@ export function Writing() {
               More on{" "}
               <ExternalLink
                 href={medium.href}
+                eventName="social_medium"
                 className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Medium
@@ -46,6 +47,7 @@ export function Writing() {
               and{" "}
               <ExternalLink
                 href={substack.href}
+                eventName="social_substack"
                 className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Substack
@@ -65,6 +67,7 @@ export function Writing() {
                   <VenueProfileCard
                     label={social.label}
                     href={social.href}
+                    venue={social.label}
                   />
                 </li>
               );

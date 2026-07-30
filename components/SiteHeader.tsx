@@ -94,6 +94,7 @@ export function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View resume (PDF)"
+                eventName="resume_click"
                 className={resumeClassName}
               >
                 Resume
@@ -109,6 +110,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View resume (PDF)"
+            eventName="resume_click"
             className={`inline-flex min-h-11 items-center px-2 ${resumeClassName}`}
           >
             Resume

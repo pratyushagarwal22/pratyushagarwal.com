@@ -49,12 +49,12 @@ export const site: SiteContent = {
     {
       id: "medium",
       label: "Medium",
-      href: "https://www.medium.com/@agarwal-pratyush",
+      href: "https://agarwal-pratyush.medium.com/",
     },
     {
       id: "substack",
       label: "Substack",
-      href: "https://www.substack.com/@agarwalpratyush",
+      href: "https://agarwalpratyush.substack.com/",
     },
   ],
   about:

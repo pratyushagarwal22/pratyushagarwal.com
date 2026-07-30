@@ -78,16 +78,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
             {project.links.length > 0 ? (
               <ul className="mt-3 flex list-none flex-wrap gap-x-4 gap-y-1 p-0">
-                {project.links.map((link) => (
-                  <li key={link.href}>
-                    <ExternalLink
-                      href={link.href}
-                      className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                    >
-                      {link.label}
-                    </ExternalLink>
-                  </li>
-                ))}
+                {project.links.map((link) => {
+                  const eventName =
+                    link.label === "GitHub"
+                      ? "project_github"
+                      : link.label === "Live"
+                        ? "project_live"
+                        : undefined;
+                  return (
+                    <li key={link.href}>
+                      <ExternalLink
+                        href={link.href}
+                        eventName={eventName}
+                        eventData={
+                          eventName ? { project: project.id } : undefined
+                        }
+                        className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        {link.label}
+                      </ExternalLink>
+                    </li>
+                  );
+                })}
               </ul>
             ) : null}
           </div>

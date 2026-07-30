@@ -35,6 +35,11 @@ export function PublicationCard({ publication }: PublicationCardProps) {
       <div className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
         <ExternalLink
           href={publication.href}
+          eventName="publication_read"
+          eventData={{
+            venue: publication.venue,
+            title: publication.title,
+          }}
           className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           Read paper

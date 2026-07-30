@@ -13,6 +13,9 @@ export function SiteFooter() {
               <li key={social.id}>
                 <ExternalLink
                   href={social.href}
+                  eventName={
+                    social.id === "email" ? "email_click" : `social_${social.id}`
+                  }
                   className="inline-flex min-h-11 items-center font-body text-sm text-text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   {social.label}

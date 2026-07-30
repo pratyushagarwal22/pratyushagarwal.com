@@ -39,6 +39,7 @@ function renderBodyWithInlineLinks(
       <ExternalLink
         key={index}
         href={href}
+        eventName="log_inline_link"
         className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         {part}
@@ -124,6 +125,8 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                 <p className="mt-3">
                   <ExternalLink
                     href={entry.href}
+                    eventName="log_repo"
+                    eventData={{ title: entry.title }}
                     className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     View Repo

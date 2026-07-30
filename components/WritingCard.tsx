@@ -14,6 +14,8 @@ export function WritingCard({ item }: WritingCardProps) {
     <article className={cardClassName}>
       <ExternalLink
         href={item.href}
+        eventName="writing_click"
+        eventData={{ venue: item.venue }}
         className="group block rounded-sm p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
@@ -43,14 +45,21 @@ export function WritingCard({ item }: WritingCardProps) {
 type VenueProfileCardProps = {
   label: string;
   href: string;
+  venue?: string;
 };
 
 /** Profile-level venue card for empty writing data — no invented article titles. */
-export function VenueProfileCard({ label, href }: VenueProfileCardProps) {
+export function VenueProfileCard({
+  label,
+  href,
+  venue,
+}: VenueProfileCardProps) {
   return (
     <article className={cardClassName}>
       <ExternalLink
         href={href}
+        eventName="writing_click"
+        eventData={venue ? { venue } : undefined}
         className="group block rounded-sm p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
         <h3 className="font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">

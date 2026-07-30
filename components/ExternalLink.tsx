@@ -1,7 +1,15 @@
-import type { ComponentPropsWithoutRef } from "react";
+"use client";
+
+import { track } from "@vercel/analytics";
+import type { ComponentPropsWithoutRef, MouseEvent } from "react";
+
+type TrackProperties = Record<string, string | number | boolean | null>;
 
 type ExternalLinkProps = ComponentPropsWithoutRef<"a"> & {
   href: string;
+  /** Vercel Analytics custom event name. Falls back to outbound_click. */
+  eventName?: string;
+  eventData?: TrackProperties;
 };
 
 /**
@@ -14,6 +22,9 @@ export function ExternalLink({
   className,
   rel,
   target,
+  eventName,
+  eventData,
+  onClick,
   ...props
 }: ExternalLinkProps) {
   const isExternal = href.startsWith("http://") || href.startsWith("https://");
@@ -36,6 +47,15 @@ export function ExternalLink({
     announcement = " (opens in a new tab)";
   }
 
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (eventName) {
+      track(eventName, eventData);
+    } else {
+      track("outbound_click", { href });
+    }
+    onClick?.(event);
+  }
+
   return (
     <a
       href={href}
@@ -43,6 +63,7 @@ export function ExternalLink({
       target={resolvedTarget}
       rel={resolvedRel}
       {...props}
+      onClick={handleClick}
     >
       {children}
       {announcement ? <span className="sr-only">{announcement}</span> : null}

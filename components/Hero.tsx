@@ -49,12 +49,13 @@ export function Hero() {
 
       <p className="mt-8 font-body text-base text-text-muted sm:mt-10 sm:text-lg">
         Currently building{" "}
-        <a
+        <ExternalLink
           href={site.currentlyBuilding.href}
+          eventName="currently_building_mnemo"
           className="font-medium text-accent hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {site.currentlyBuilding.name}
-        </a>
+        </ExternalLink>
       </p>
 
       <div className="mt-8 flex flex-col items-start gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-3">
@@ -63,6 +64,7 @@ export function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View resume (PDF)"
+          eventName="resume_click"
           className="inline-flex min-h-11 items-center justify-center rounded-sm bg-accent px-5 py-2.5 font-body text-base font-medium text-white hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           Resume
@@ -76,6 +78,7 @@ export function Hero() {
         {email ? (
           <ExternalLink
             href={email.href}
+            eventName="email_click"
             className="inline-flex min-h-11 max-w-full items-center justify-center break-all font-body text-base font-medium text-text-muted underline-offset-4 hover:text-text hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:break-normal"
           >
             hi@pratyushagarwal.com
@@ -91,6 +94,7 @@ export function Hero() {
           <li key={social.id}>
             <ExternalLink
               href={social.href}
+              eventName={`social_${social.id}`}
               className="inline-flex min-h-11 items-center font-body text-sm text-text-muted hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {social.label}
