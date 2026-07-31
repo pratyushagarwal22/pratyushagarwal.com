@@ -74,19 +74,67 @@ type GraphQLCalendarResponse = {
   errors?: unknown[];
 };
 
-type PublicEvent = {
-  type: string;
-  created_at: string;
-  repo: { name: string };
-  payload?: {
-    head?: string;
-    commits?: { sha: string; message: string }[];
-  };
+const RECENT_COMMITS_QUERY = `
+  query RecentCommits($login: String!) {
+    user(login: $login) {
+      contributionsCollection {
+        commitContributionsByRepository(maxRepositories: 10) {
+          repository {
+            nameWithOwner
+            url
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history(first: 1) {
+                    nodes {
+                      oid
+                      messageHeadline
+                      committedDate
+                      commitUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+type GraphQLCommitNode = {
+  oid?: string | null;
+  messageHeadline?: string | null;
+  committedDate?: string | null;
+  commitUrl?: string | null;
 };
 
-type CommitApiResponse = {
-  sha: string;
-  commit?: { message?: string };
+type GraphQLCommitRepository = {
+  repository?: {
+    nameWithOwner?: string | null;
+    url?: string | null;
+    defaultBranchRef?: {
+      target?: {
+        history?: {
+          nodes?: (GraphQLCommitNode | null)[] | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
+type GraphQLRecentCommitsResponse = {
+  data?: {
+    user?: {
+      contributionsCollection?: {
+        commitContributionsByRepository?:
+          | (GraphQLCommitRepository | null)[]
+          | null;
+      } | null;
+    } | null;
+  };
+  errors?: unknown[];
 };
 
 function mapContributionLevel(
@@ -174,97 +222,72 @@ async function fetchRecentCommits(
   token: string,
 ): Promise<RecentCommit[] | null> {
   try {
-    const response = await fetch(
-      `https://api.github.com/users/${encodeURIComponent(login)}/events/public`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/vnd.github+json",
-        },
-        next: { revalidate: REVALIDATE_SECONDS },
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        query: RECENT_COMMITS_QUERY,
+        variables: { login },
+      }),
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
 
     if (!response.ok) {
       return null;
     }
 
-    const events = (await response.json()) as PublicEvent[];
-    if (!Array.isArray(events)) {
+    const json = (await response.json()) as GraphQLRecentCommitsResponse;
+    if (json.errors?.length) {
       return null;
     }
 
-    // Public events API returns PushEvents with head/before only (no
-    // payload.commits). Events arrive newest-first: keep the most recent
-    // PushEvent per distinct repo, up to 3 repos, then fetch messages.
-    const candidates: { repo: string; sha: string; occurredAt: string }[] = [];
-    const seenRepos = new Set<string>();
-    for (const event of events) {
-      if (event.type !== "PushEvent") {
-        continue;
-      }
-
-      const sha = event.payload?.head;
-      const repo = event.repo?.name;
-      if (!sha || !repo || seenRepos.has(repo)) {
-        continue;
-      }
-
-      seenRepos.add(repo);
-      candidates.push({
-        repo,
-        sha,
-        occurredAt: event.created_at,
-      });
-
-      if (candidates.length >= 3) {
-        break;
-      }
+    const byRepository =
+      json.data?.user?.contributionsCollection?.commitContributionsByRepository;
+    if (!Array.isArray(byRepository)) {
+      return null;
     }
 
-    const settled = await Promise.all(
-      candidates.map(async (candidate) => {
-        try {
-          const commitResponse = await fetch(
-            `https://api.github.com/repos/${candidate.repo}/commits/${encodeURIComponent(candidate.sha)}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                Accept: "application/vnd.github+json",
-              },
-              next: { revalidate: REVALIDATE_SECONDS },
-            },
-          );
+    // Top repos by recent commit activity; repos without a resolvable latest
+    // commit (empty repo, no default branch) are skipped, not a failure.
+    const candidates: RecentCommit[] = [];
+    for (const entry of byRepository) {
+      const repository = entry?.repository;
+      const commit =
+        repository?.defaultBranchRef?.target?.history?.nodes?.[0];
+      if (
+        !repository?.nameWithOwner ||
+        !repository.url ||
+        !commit?.oid ||
+        !commit.messageHeadline ||
+        !commit.committedDate ||
+        !commit.commitUrl
+      ) {
+        continue;
+      }
 
-          if (!commitResponse.ok) {
-            return null;
-          }
+      // messageHeadline is already a single line; split is a safety net.
+      const message =
+        commit.messageHeadline.split("\n")[0] ?? commit.messageHeadline;
 
-          const body = (await commitResponse.json()) as CommitApiResponse;
-          const fullMessage = body.commit?.message;
-          if (!fullMessage) {
-            return null;
-          }
+      candidates.push({
+        sha: commit.oid,
+        message,
+        repo: repository.nameWithOwner,
+        repoUrl: repository.url,
+        commitUrl: commit.commitUrl,
+        occurredAt: commit.committedDate,
+      });
+    }
 
-          const message = fullMessage.split("\n")[0] ?? fullMessage;
-          const sha = body.sha || candidate.sha;
-          const repoUrl = `https://github.com/${candidate.repo}`;
-
-          return {
-            sha,
-            message,
-            repo: candidate.repo,
-            repoUrl,
-            commitUrl: `${repoUrl}/commit/${sha}`,
-            occurredAt: candidate.occurredAt,
-          } satisfies RecentCommit;
-        } catch {
-          return null;
-        }
-      }),
+    candidates.sort(
+      (a, b) =>
+        new Date(b.occurredAt).getTime() - new Date(a.occurredAt).getTime(),
     );
 
-    return settled.filter((commit): commit is RecentCommit => commit !== null);
+    return candidates.slice(0, 3);
   } catch {
     return null;
   }
