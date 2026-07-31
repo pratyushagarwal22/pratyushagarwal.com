@@ -1,5 +1,6 @@
 import type { WritingItem } from "@/data/writing";
 import { Chip } from "./Chip";
+import { EntryHeader } from "./EntryHeader";
 import { ExternalLink } from "./ExternalLink";
 
 type WritingCardProps = {
@@ -18,15 +19,19 @@ export function WritingCard({ item }: WritingCardProps) {
         eventData={{ venue: item.venue }}
         className="group block rounded-sm p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
-        <div className="flex items-start gap-x-3">
-          <h3 className="min-w-0 flex-1 break-words font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
-            {item.title}
-          </h3>
-          <p className="shrink-0 whitespace-nowrap font-body text-sm text-text-muted">
-            {item.venue} ·{" "}
-            <time dateTime={item.date}>{item.date}</time>
-          </p>
-        </div>
+        <EntryHeader
+          title={
+            <h3 className="break-words font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
+              {item.title}
+            </h3>
+          }
+          meta={
+            <>
+              {item.venue} ·{" "}
+              <time dateTime={item.date}>{item.date}</time>
+            </>
+          }
+        />
 
         {item.topics.length > 0 ? (
           <ul className="mt-3 flex list-none flex-wrap gap-1.5 p-0">

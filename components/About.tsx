@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { site } from "@/data/site";
 import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
+import { EntryHeader } from "./EntryHeader";
 import { SectionHeading } from "./SectionHeading";
 
 /** Split at a sentence boundary for readability — words unchanged. */
@@ -48,13 +49,20 @@ export function About() {
             <p className="font-body text-xs font-medium uppercase tracking-wide text-text-muted">
               Education
             </p>
-            <ul className="mt-2 list-none space-y-1.5 p-0">
+            <ul className="mt-2 list-none space-y-3 p-0">
               {site.education.map((item) => (
-                <li
-                  key={item.line}
-                  className="break-words font-body text-sm leading-relaxed text-text-muted sm:text-base"
-                >
-                  {item.line}
+                <li key={item.institution}>
+                  <EntryHeader
+                    title={
+                      <p className="break-words font-body text-sm font-medium text-text sm:text-base">
+                        {item.institution}
+                      </p>
+                    }
+                    meta={item.years}
+                  />
+                  <p className="mt-0.5 break-words font-body text-sm leading-relaxed text-text-muted sm:text-base">
+                    {item.degree}
+                  </p>
                 </li>
               ))}
             </ul>

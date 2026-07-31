@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import type { Publication } from "@/data/publications";
+import { EntryHeader } from "./EntryHeader";
 import { ExternalLink } from "./ExternalLink";
 
 type PublicationCardProps = {
@@ -74,15 +75,19 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 function PublicationHeader({ publication }: { publication: Publication }) {
   return (
     <>
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h3 className="min-w-0 break-words font-body text-base font-medium text-text sm:text-[1.0625rem]">
-          {publication.title}
-        </h3>
-        <p className="shrink-0 font-body text-sm text-text-muted">
-          {publication.venue} ·{" "}
-          <time dateTime={publication.date}>{publication.date}</time>
-        </p>
-      </div>
+      <EntryHeader
+        title={
+          <h3 className="break-words font-body text-base font-medium text-text sm:text-[1.0625rem]">
+            {publication.title}
+          </h3>
+        }
+        meta={
+          <>
+            {publication.venue} ·{" "}
+            <time dateTime={publication.date}>{publication.date}</time>
+          </>
+        }
+      />
 
       <p className="mt-1.5 break-words font-body text-sm leading-relaxed text-text-muted sm:text-base">
         {publication.summary}

@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { ExperienceItem as ExperienceRole } from "@/data/experience";
 import { Chip } from "./Chip";
+import { EntryHeader } from "./EntryHeader";
 
 type ExperienceItemProps = {
   item: ExperienceRole;
@@ -24,12 +25,14 @@ export function ExperienceItem({ item }: ExperienceItemProps) {
         onClick={() => setExpanded((v) => !v)}
         className="group w-full rounded-sm p-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h3 className="min-w-0 break-words font-body text-base font-medium text-text sm:text-[1.0625rem]">
-            {item.company}
-          </h3>
-          <p className="shrink-0 font-body text-sm text-text-muted">{meta}</p>
-        </div>
+        <EntryHeader
+          title={
+            <h3 className="break-words font-body text-base font-medium text-text sm:text-[1.0625rem]">
+              {item.company}
+            </h3>
+          }
+          meta={meta}
+        />
 
         <p className="mt-0.5 break-words font-body text-sm text-text-muted sm:text-base">
           {item.role}
