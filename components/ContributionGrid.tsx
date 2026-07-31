@@ -15,7 +15,10 @@ const CONTRIB_BG: Record<ContributionDay["level"], string> = {
 export function ContributionGrid({ calendar }: ContributionGridProps) {
   return (
     <div className="min-w-0 max-w-full">
-      <div className="max-w-full overflow-x-auto overscroll-x-contain [direction:rtl] [-webkit-overflow-scrolling:touch]">
+      <div
+        tabIndex={0}
+        className="max-w-full overflow-x-auto overscroll-x-contain [direction:rtl] [-webkit-overflow-scrolling:touch] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
         <div className="flex w-fit gap-0.5 [direction:ltr]">
           {calendar.weeks.map((week) => (
             <div key={week.days[0]?.date ?? "empty"} className="flex flex-col gap-0.5">

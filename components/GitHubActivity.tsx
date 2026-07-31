@@ -13,14 +13,23 @@ export async function GitHubActivity() {
   const showUnavailable =
     calendar === null && (commits === null || commits.length === 0);
 
+  const regionLabel =
+    calendar !== null
+      ? `GitHub activity, ${calendar.totalContributions} contributions in the last year`
+      : "GitHub activity";
+
   return (
-    <div className="flex min-h-24 flex-col justify-center gap-4 border-b border-border pb-6">
+    <div
+      role="region"
+      aria-label={regionLabel}
+      className="flex min-h-24 flex-col justify-center gap-4 border-b border-border pb-6"
+    >
       {calendar !== null ? <ContributionGrid calendar={calendar} /> : null}
       {commits !== null && (calendar !== null || commits.length > 0) ? (
         <RecentCommits commits={commits} />
       ) : null}
       {showUnavailable ? (
-        <p className="font-body text-sm text-text-muted">
+        <p role="status" className="font-body text-sm text-text-muted">
           GitHub activity unavailable
         </p>
       ) : null}
