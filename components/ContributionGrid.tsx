@@ -17,15 +17,18 @@ export function ContributionGrid({ calendar }: ContributionGridProps) {
     <div className="min-w-0 max-w-full">
       <div
         tabIndex={0}
-        className="max-w-full overflow-x-auto overscroll-x-contain [direction:rtl] [-webkit-overflow-scrolling:touch] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="max-w-full overflow-x-auto overscroll-x-contain max-md:[direction:rtl] md:[direction:ltr] [-webkit-overflow-scrolling:touch] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
-        <div className="flex w-fit gap-0.5 [direction:ltr]">
+        <div className="flex w-full gap-0.5 max-md:w-max [direction:ltr]">
           {calendar.weeks.map((week) => (
-            <div key={week.days[0]?.date ?? "empty"} className="flex flex-col gap-0.5">
+            <div
+              key={week.days[0]?.date ?? "empty"}
+              className="flex w-[14px] shrink-0 flex-col gap-0.5 md:w-auto md:min-w-0 md:max-w-[14px] md:flex-1"
+            >
               {week.days.map((day) => (
                 <div
                   key={day.date}
-                  className={`size-2.5 ${CONTRIB_BG[day.level]}`}
+                  className={`aspect-square w-full ${CONTRIB_BG[day.level]}`}
                   aria-label={`${day.contributionCount} contributions on ${day.date}`}
                 />
               ))}
