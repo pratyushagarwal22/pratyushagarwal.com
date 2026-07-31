@@ -12,6 +12,11 @@
   --color-accent-hover: #163a6b;
   --color-chip-bg: #f0f0ef;
   --color-chip-text: #3d3d3d;
+  --color-contrib-0: #f0f0ef;
+  --color-contrib-1: #c5d4e8;
+  --color-contrib-2: #7a9bc4;
+  --color-contrib-3: #3a6ba3;
+  --color-contrib-4: #1e4e8c;
 }
 
 @theme inline {
@@ -25,6 +30,11 @@
   --color-accent-hover: #163a6b;
   --color-chip-bg: #f0f0ef;
   --color-chip-text: #3d3d3d;
+  --color-contrib-0: #f0f0ef;
+  --color-contrib-1: #c5d4e8;
+  --color-contrib-2: #7a9bc4;
+  --color-contrib-3: #3a6ba3;
+  --color-contrib-4: #1e4e8c;
   --font-display: var(--font-newsreader);
   --font-body: var(--font-source-sans);
   --font-mono: var(--font-ibm-plex-mono);
