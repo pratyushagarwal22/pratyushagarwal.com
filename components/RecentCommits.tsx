@@ -70,7 +70,7 @@ export function RecentCommits({ commits }: RecentCommitsProps) {
             <div className="relative flex flex-col items-end pt-1 pr-2 sm:pr-4">
               <time
                 dateTime={commit.occurredAt}
-                className="font-mono text-[0.6875rem] text-text-muted sm:text-[0.8125rem]"
+                className="whitespace-nowrap font-mono text-[0.6875rem] text-text-muted sm:text-[0.8125rem]"
               >
                 {formatRelativeTime(commit.occurredAt)}
               </time>
