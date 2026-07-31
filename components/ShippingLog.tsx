@@ -1,5 +1,5 @@
 import { contentContainerClassName, sectionScrollMarginClassName } from "./ContentContainer";
-import { GitHubSlot } from "./GitHubSlot";
+import { GitHubActivity } from "./GitHubActivity";
 import { SectionHeading } from "./SectionHeading";
 import { ShippingLogList } from "./ShippingLogList";
 
@@ -16,7 +16,7 @@ export function ShippingLog() {
       </p>
 
       <div className="mt-8 flex flex-col gap-8">
-        <GitHubSlot />
+        <GitHubActivity />
 
         <ShippingLogList />
       </div>
