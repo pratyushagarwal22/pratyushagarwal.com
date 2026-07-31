@@ -5,12 +5,11 @@ import { ExternalLink } from "./ExternalLink";
 import { SectionHeading } from "./SectionHeading";
 import { VenueProfileCard, WritingCard } from "./WritingCard";
 
-const PROFILE_VENUES = ["medium", "substack", "linkedin"] as const;
+const PROFILE_VENUES = ["substack", "linkedin"] as const;
 
 export function Writing() {
   const hasPosts = writing.length > 0;
 
-  const medium = site.socials.find((s) => s.id === "medium");
   const substack = site.socials.find((s) => s.id === "substack");
 
   return (
@@ -21,7 +20,7 @@ export function Writing() {
     >
       <SectionHeading id="writing-heading">Writing</SectionHeading>
       <p className="mt-2 font-body text-base text-text-muted">
-        Notes on building in public — Medium, Substack, and LinkedIn.
+        Notes on building in public — Substack and LinkedIn.
       </p>
 
       {hasPosts ? (
@@ -34,17 +33,9 @@ export function Writing() {
             ))}
           </ul>
 
-          {medium && substack ? (
+          {substack ? (
             <p className="mt-6 font-body text-sm text-text-muted">
               More on{" "}
-              <ExternalLink
-                href={medium.href}
-                eventName="social_medium"
-                className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                Medium
-              </ExternalLink>{" "}
-              and{" "}
               <ExternalLink
                 href={substack.href}
                 eventName="social_substack"

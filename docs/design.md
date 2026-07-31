@@ -143,7 +143,7 @@ Order is fixed: Hero → Now → Stats → Projects → Publications → Experie
   1. **View resume** → PDF in `public/` (sourced from `assets/pratyush-agarwal-resume.pdf`)
   2. **See what I’m building** → scroll to `#now` (shipping log)
   3. **Email** → `mailto:hi@pratyushagarwal.com`
-- Secondary text links (muted): GitHub (`pratyushagarwal22`), LinkedIn (`agarwal-pratyush`), Medium (`@agarwal-pratyush`), Substack (`@agarwalpratyush`)
+- Secondary text links (muted): GitHub (`pratyushagarwal22`), LinkedIn (`agarwal-pratyush`), Substack (`@agarwalpratyush`)
 - No stats, no project cards, no log entries in the hero
 
 ### 6.2 Now / Shipping Log (`#now`) — signature
@@ -200,7 +200,7 @@ Order is fixed: Hero → Now → Stats → Projects → Publications → Experie
 
 ### 6.7 Writing (`#writing`)
 
-- Simple cards: title, venue (Medium / Substack / LinkedIn), date, topic tags; click → external URL
+- Simple cards: title, venue (Substack / LinkedIn), date, topic tags; click → external URL
 - Topics focus: Mnemo build, DSA, system design, LLD
 - Hover raise; no on-page article body in v1
 
@@ -268,7 +268,7 @@ data/
 ```ts
 // data/site.ts
 export type SocialLink = {
-  id: 'github' | 'linkedin' | 'medium' | 'substack' | 'email';
+  id: 'github' | 'linkedin' | 'substack' | 'email';
   label: string;
   href: string;
 };
@@ -376,7 +376,7 @@ export type ExperienceItem = {
 export type WritingItem = {
   id: string;
   title: string;
-  venue: 'Medium' | 'Substack' | 'LinkedIn';
+  venue: 'Substack' | 'LinkedIn';
   date: string; // ISO
   href: string;
   topics: string[];

@@ -1,7 +1,7 @@
 export type WritingItem = {
   id: string;
   title: string;
-  venue: "Medium" | "Substack" | "LinkedIn";
+  venue: "Substack" | "LinkedIn";
   date: string;
   href: string;
   topics: string[];

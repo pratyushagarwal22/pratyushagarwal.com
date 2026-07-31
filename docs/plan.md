@@ -373,7 +373,7 @@ Expected: success.
 **Needs from you:** Real article URLs in Task 4 when posts exist. If none yet, leave `writing` empty (or omit post entries) — do not invent titles/URLs.
 
 **Content fallback rule:**
-- If `data/writing.ts` has **no published articles** when this task runs: render **profile-level cards** for Medium, Substack, and LinkedIn (hrefs from `site.socials`), with framing that posts are coming (e.g. short muted line: “Writing in public — posts coming soon” plus venue profile links).
+- If `data/writing.ts` has **no published articles** when this task runs: render **profile-level cards** for Substack and LinkedIn (hrefs from `site.socials`), with framing that posts are coming (e.g. short muted line: “Writing in public — posts coming soon” plus venue profile links).
 - Individual post cards are added later only via real edits to `data/writing.ts`.
 - **Never invent placeholder article titles or URLs.**
 
@@ -386,7 +386,7 @@ Expected: success.
 ```bash
 npm run dev
 ```
-Browser: If posts in data → post cards open real URLs. If empty → three profile cards (Medium / Substack / LinkedIn) + coming-soon framing; no invented article titles.
+Browser: If posts in data → post cards open real URLs. If empty → two profile cards (Substack / LinkedIn) + coming-soon framing; no invented article titles.
 ```bash
 npm run build
 ```

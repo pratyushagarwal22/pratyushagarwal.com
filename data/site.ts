@@ -1,5 +1,5 @@
 export type SocialLink = {
-  id: "github" | "linkedin" | "medium" | "substack" | "email";
+  id: "github" | "linkedin" | "substack" | "email";
   label: string;
   href: string;
 };
@@ -45,11 +45,6 @@ export const site: SiteContent = {
       id: "linkedin",
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/agarwal-pratyush/",
-    },
-    {
-      id: "medium",
-      label: "Medium",
-      href: "https://agarwal-pratyush.medium.com/",
     },
     {
       id: "substack",
