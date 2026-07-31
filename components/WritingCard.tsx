@@ -18,11 +18,11 @@ export function WritingCard({ item }: WritingCardProps) {
         eventData={{ venue: item.venue }}
         className="group block rounded-sm p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5"
       >
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h3 className="min-w-0 break-words font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
+        <div className="flex items-start gap-x-3">
+          <h3 className="min-w-0 flex-1 break-words font-body text-base font-medium text-accent underline-offset-4 group-hover:underline sm:text-[1.0625rem]">
             {item.title}
           </h3>
-          <p className="shrink-0 font-body text-sm text-text-muted">
+          <p className="shrink-0 whitespace-nowrap font-body text-sm text-text-muted">
             {item.venue} ·{" "}
             <time dateTime={item.date}>{item.date}</time>
           </p>

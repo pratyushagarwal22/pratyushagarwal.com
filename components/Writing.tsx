@@ -35,15 +35,14 @@ export function Writing() {
 
           {substack ? (
             <p className="mt-6 font-body text-sm text-text-muted">
-              More on{" "}
+              Follow along on{" "}
               <ExternalLink
                 href={substack.href}
                 eventName="social_substack"
                 className="text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Substack
-              </ExternalLink>{" "}
-              — posts coming soon
+              </ExternalLink>
             </p>
           ) : null}
         </>

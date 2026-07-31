@@ -121,7 +121,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                   {renderBodyWithInlineLinks(paragraph, entry.inlineLinks)}
                 </p>
               ))}
-              {entry.href ? (
+              {entry.href && entry.hrefLabel ? (
                 <p className="mt-3">
                   <ExternalLink
                     href={entry.href}
@@ -129,7 +129,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
                     eventData={{ title: entry.title }}
                     className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
-                    View Repo
+                    {entry.hrefLabel}
                   </ExternalLink>
                 </p>
               ) : null}

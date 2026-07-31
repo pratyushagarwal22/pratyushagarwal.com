@@ -9,6 +9,15 @@ export type WritingItem = {
 
 export const writing: WritingItem[] = [
   {
+    id: "post-lead-intake",
+    title:
+      "I built a lead intake app with an AI Coding Agent. Here is what went wrong, and why that was the point.",
+    venue: "Substack",
+    date: "2026-07-30",
+    href: "https://agarwalpratyush.substack.com/p/ai-coding-agent-lead-intake-app",
+    topics: ["AI coding agents", "Full-stack", "Building in public"],
+  },
+  {
     id: "tickersense-linkedin",
     title: "TickerSense: 2nd place at the Claude Builder Club Hackathon",
     venue: "LinkedIn",
