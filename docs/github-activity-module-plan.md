@@ -156,6 +156,8 @@ Expected: no type errors in `lib/github.ts`. With Task 1 token present, a quick 
 
 **Done when:** Types + `getGitHubActivity` exist; `revalidate: 3600` on both fetches; failures return `null` halves without throwing.
 
+**Implementation notes / deviations:** The recent-commits feed no longer reads inline `payload.commits` from public PushEvents. That array is absent from the current public events API (payloads expose `head`/`before` only). Instead, `fetchRecentCommits` takes up to 3 newest PushEvent `head` SHAs and fetches each message via `GET /repos/{owner}/{repo}/commits/{sha}` in parallel, keeping the same `RecentCommit` shape and null-vs-`[]` failure contract.
+
 ---
 
 ### Task 3: `ShippingLog` server shell + client list child

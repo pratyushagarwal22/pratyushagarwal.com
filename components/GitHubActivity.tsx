@@ -22,7 +22,7 @@ export async function GitHubActivity() {
     <div
       role="region"
       aria-label={regionLabel}
-      className="flex min-h-24 flex-col justify-center gap-4 border-b border-border pb-6"
+      className="flex min-h-24 flex-col justify-center gap-6 border-b border-border pb-6"
     >
       {calendar !== null ? <ContributionGrid calendar={calendar} /> : null}
       {commits !== null && (calendar !== null || commits.length > 0) ? (

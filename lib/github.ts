@@ -78,8 +78,14 @@ type PublicEvent = {
   created_at: string;
   repo: { name: string };
   payload?: {
+    head?: string;
     commits?: { sha: string; message: string }[];
   };
+};
+
+type CommitApiResponse = {
+  sha: string;
+  commit?: { message?: string };
 };
 
 function mapContributionLevel(
@@ -187,34 +193,74 @@ async function fetchRecentCommits(
       return null;
     }
 
-    const commits: RecentCommit[] = [];
-
+    // Public events API returns PushEvents with head/before only (no
+    // payload.commits). Collect newest PushEvent heads, then fetch messages.
+    const candidates: { repo: string; sha: string; occurredAt: string }[] = [];
     for (const event of events) {
       if (event.type !== "PushEvent") {
         continue;
       }
 
-      const pushCommits = [...(event.payload?.commits ?? [])].reverse();
-      const repo = event.repo.name;
-      const repoUrl = `https://github.com/${repo}`;
+      const sha = event.payload?.head;
+      const repo = event.repo?.name;
+      if (!sha || !repo) {
+        continue;
+      }
 
-      for (const commit of pushCommits) {
-        commits.push({
-          sha: commit.sha,
-          message: commit.message,
-          repo,
-          repoUrl,
-          commitUrl: `${repoUrl}/commit/${commit.sha}`,
-          occurredAt: event.created_at,
-        });
+      candidates.push({
+        repo,
+        sha,
+        occurredAt: event.created_at,
+      });
 
-        if (commits.length >= 3) {
-          return commits;
-        }
+      if (candidates.length >= 3) {
+        break;
       }
     }
 
-    return commits;
+    const settled = await Promise.all(
+      candidates.map(async (candidate) => {
+        try {
+          const commitResponse = await fetch(
+            `https://api.github.com/repos/${candidate.repo}/commits/${encodeURIComponent(candidate.sha)}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                Accept: "application/vnd.github+json",
+              },
+              next: { revalidate: REVALIDATE_SECONDS },
+            },
+          );
+
+          if (!commitResponse.ok) {
+            return null;
+          }
+
+          const body = (await commitResponse.json()) as CommitApiResponse;
+          const fullMessage = body.commit?.message;
+          if (!fullMessage) {
+            return null;
+          }
+
+          const message = fullMessage.split("\n")[0] ?? fullMessage;
+          const sha = body.sha || candidate.sha;
+          const repoUrl = `https://github.com/${candidate.repo}`;
+
+          return {
+            sha,
+            message,
+            repo: candidate.repo,
+            repoUrl,
+            commitUrl: `${repoUrl}/commit/${sha}`,
+            occurredAt: candidate.occurredAt,
+          } satisfies RecentCommit;
+        } catch {
+          return null;
+        }
+      }),
+    );
+
+    return settled.filter((commit): commit is RecentCommit => commit !== null);
   } catch {
     return null;
   }
