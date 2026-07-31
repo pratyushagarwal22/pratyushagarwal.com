@@ -25,8 +25,8 @@ export type GitHubActivityData = {
   commits: RecentCommit[] | null;
 };
 
-// 6h — was 3600 during build/verify; see docs/github-activity-module-design.md §5
-const REVALIDATE_SECONDS = 21600;
+// 2h — commit list + contribution grid refresh interval
+const REVALIDATE_SECONDS = 7200;
 
 const CONTRIBUTION_CALENDAR_QUERY = `
   query ContributionCalendar($login: String!) {
@@ -195,8 +195,10 @@ async function fetchRecentCommits(
     }
 
     // Public events API returns PushEvents with head/before only (no
-    // payload.commits). Collect newest PushEvent heads, then fetch messages.
+    // payload.commits). Events arrive newest-first: keep the most recent
+    // PushEvent per distinct repo, up to 3 repos, then fetch messages.
     const candidates: { repo: string; sha: string; occurredAt: string }[] = [];
+    const seenRepos = new Set<string>();
     for (const event of events) {
       if (event.type !== "PushEvent") {
         continue;
@@ -204,10 +206,11 @@ async function fetchRecentCommits(
 
       const sha = event.payload?.head;
       const repo = event.repo?.name;
-      if (!sha || !repo) {
+      if (!sha || !repo || seenRepos.has(repo)) {
         continue;
       }
 
+      seenRepos.add(repo);
       candidates.push({
         repo,
         sha,

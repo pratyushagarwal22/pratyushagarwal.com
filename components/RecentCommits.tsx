@@ -1,45 +1,11 @@
 import type { RecentCommit } from "@/lib/github";
 import { Chip } from "./Chip";
 import { ExternalLink } from "./ExternalLink";
+import { RelativeTime } from "./RelativeTime";
 
 type RecentCommitsProps = {
   commits: RecentCommit[];
 };
-
-function formatRelativeTime(iso: string): string {
-  const diffMs = Date.now() - new Date(iso).getTime();
-  const absMs = Math.abs(diffMs);
-
-  const minute = 1000 * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const week = day * 7;
-  const month = day * 30;
-  const year = day * 365;
-
-  if (absMs < minute) {
-    return "just now";
-  }
-
-  const divisions: { ms: number; singular: string; plural: string }[] = [
-    { ms: year, singular: "yr", plural: "yrs" },
-    { ms: month, singular: "mo", plural: "mos" },
-    { ms: week, singular: "wk", plural: "wks" },
-    { ms: day, singular: "day", plural: "days" },
-    { ms: hour, singular: "hr", plural: "hrs" },
-    { ms: minute, singular: "min", plural: "mins" },
-  ];
-
-  for (const { ms, singular, plural } of divisions) {
-    if (absMs >= ms) {
-      const value = Math.round(absMs / ms);
-      const unit = value === 1 ? singular : plural;
-      return `${value} ${unit} ago`;
-    }
-  }
-
-  return "just now";
-}
 
 function firstLine(message: string): string {
   return message.split("\n")[0] ?? message;
@@ -68,12 +34,10 @@ export function RecentCommits({ commits }: RecentCommitsProps) {
             className="relative grid grid-cols-[4.75rem_minmax(0,1fr)] gap-x-2 sm:grid-cols-[7rem_1fr] sm:gap-x-4"
           >
             <div className="relative flex flex-col items-end pt-1 pr-2 sm:pr-4">
-              <time
-                dateTime={commit.occurredAt}
+              <RelativeTime
+                iso={commit.occurredAt}
                 className="whitespace-nowrap font-mono text-[0.6875rem] text-text-muted sm:text-[0.8125rem]"
-              >
-                {formatRelativeTime(commit.occurredAt)}
-              </time>
+              />
               <span
                 aria-hidden="true"
                 className="mt-1 select-none font-mono text-[0.6875rem] leading-none text-text-muted/70"
