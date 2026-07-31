@@ -43,9 +43,12 @@ function formatRelativeTime(iso: string): string {
 }
 
 export function RelativeTime({ iso, className }: RelativeTimeProps) {
-  // Server-rendered value can differ from the client's clock at hydration
-  // time, so recompute on mount and suppress the (harmless) mismatch warning.
-  const [label, setLabel] = useState(() => formatRelativeTime(iso));
+  // Relative time depends on the client clock, so the server (ISR) value can
+  // be arbitrarily stale. Render a placeholder on the server and during
+  // hydration (identical output, so no mismatch), then compute from the real
+  // client time on mount. The null -> string state change guarantees React
+  // commits the fresh value to the DOM immediately.
+  const [label, setLabel] = useState<string | null>(null);
 
   useEffect(() => {
     setLabel(formatRelativeTime(iso));
@@ -58,8 +61,8 @@ export function RelativeTime({ iso, className }: RelativeTimeProps) {
   }, [iso]);
 
   return (
-    <time dateTime={iso} className={className} suppressHydrationWarning>
-      {label}
+    <time dateTime={iso} className={className}>
+      {label ?? "\u00A0"}
     </time>
   );
 }
