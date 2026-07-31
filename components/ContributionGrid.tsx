@@ -14,19 +14,21 @@ const CONTRIB_BG: Record<ContributionDay["level"], string> = {
 
 export function ContributionGrid({ calendar }: ContributionGridProps) {
   return (
-    <div>
-      <div className="flex w-fit gap-0.5">
-        {calendar.weeks.map((week) => (
-          <div key={week.days[0]?.date ?? "empty"} className="flex flex-col gap-0.5">
-            {week.days.map((day) => (
-              <div
-                key={day.date}
-                className={`size-2.5 ${CONTRIB_BG[day.level]}`}
-                aria-label={`${day.contributionCount} contributions on ${day.date}`}
-              />
-            ))}
-          </div>
-        ))}
+    <div className="min-w-0 max-w-full">
+      <div className="max-w-full overflow-x-auto overscroll-x-contain [direction:rtl] [-webkit-overflow-scrolling:touch]">
+        <div className="flex w-fit gap-0.5 [direction:ltr]">
+          {calendar.weeks.map((week) => (
+            <div key={week.days[0]?.date ?? "empty"} className="flex flex-col gap-0.5">
+              {week.days.map((day) => (
+                <div
+                  key={day.date}
+                  className={`size-2.5 ${CONTRIB_BG[day.level]}`}
+                  aria-label={`${day.contributionCount} contributions on ${day.date}`}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <p className="mt-2 font-body text-sm text-text-muted">
         {calendar.totalContributions.toLocaleString()} contributions in the last year
