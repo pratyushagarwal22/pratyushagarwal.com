@@ -94,7 +94,7 @@ export function LogEntry({ entry, isLast = false }: LogEntryProps) {
           onClick={() => setExpanded((v) => !v)}
           className="group w-full rounded-sm py-1 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-baseline sm:gap-2">
             <Chip label={entry.type} />
             <h3 className="min-w-0 break-words font-body text-base font-medium text-text group-hover:text-accent sm:text-[1.0625rem]">
               {entry.title}
