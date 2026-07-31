@@ -25,7 +25,8 @@ export type GitHubActivityData = {
   commits: RecentCommit[] | null;
 };
 
-const REVALIDATE_SECONDS = 3600;
+// 6h — was 3600 during build/verify; see docs/github-activity-module-design.md §5
+const REVALIDATE_SECONDS = 21600;
 
 const CONTRIBUTION_CALENDAR_QUERY = `
   query ContributionCalendar($login: String!) {
