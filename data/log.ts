@@ -24,6 +24,21 @@ export type LogEntry = {
 
 export const log: LogEntry[] = [
   {
+    id: "post-stripe-docs",
+    date: "2026-08-02",
+    marker: "9c4a1e",
+    type: "wrote",
+    title: "New Substack post: Stripe docs and subscription integration",
+    summary:
+      "Wrote about what it actually took to navigate Stripe's docs while building the Llama Inc. subscription integration, and why reading docs well is its own skill.",
+    body: [
+      "Reading someone else's documentation well is its own skill, separate from writing the code. The single most important sentence in the whole integration, that access is granted from the signed webhook and never the redirect, was buried a click deeper than the main guide. That is the story, not the Stripe plumbing itself.",
+    ],
+    href: "https://agarwalpratyush.substack.com/p/stripe-docs-subscription-integration",
+    hrefLabel: "View Post",
+    source: "manual",
+  },
+  {
     id: "website-launch",
     date: "2026-07-31",
     marker: "b1d9f4",
@@ -133,8 +148,7 @@ export const log: LogEntry[] = [
     date: "2026-04-12",
     marker: "4e8c0a",
     type: "shipped",
-    title:
-      "TickerSense placed 2nd at the Claude Builder Club Hackathon (UIUC)",
+    title: "TickerSense placed 2nd at the Claude Builder Club Hackathon (UIUC)",
     summary:
       "SEC research workspace with a source-grounded AI assistant. Next.js + FastAPI + Claude API.",
     body: [

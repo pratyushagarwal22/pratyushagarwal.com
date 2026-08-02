@@ -9,6 +9,14 @@ export type WritingItem = {
 
 export const writing: WritingItem[] = [
   {
+    id: "post-stripe-docs",
+    title: "Stripe's Docs Are Great. Finding the Right Page Wasn't.",
+    venue: "Substack",
+    date: "2026-08-02",
+    href: "https://agarwalpratyush.substack.com/p/stripe-docs-subscription-integration",
+    topics: ["Stripe", "Documentation", "Full-stack"],
+  },
+  {
     id: "post-lead-intake",
     title:
       "I built a lead intake app with an AI Coding Agent. Here is what went wrong, and why that was the point.",
