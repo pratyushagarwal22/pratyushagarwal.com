@@ -12,6 +12,23 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
+    id: "adm",
+    company: "ADM",
+    role: "Data Engineer Intern",
+    location: "Champaign, IL",
+    start: "Aug 2026",
+    end: "Present",
+    summary:
+      "Science and Technology Process Development and Carbohydrates",
+    tech: ["Power BI", "Python", "SQL", "Power Automate", "Excel"],
+    bullets: [
+      "Supporting ADM's Science and Technology Process Development and Carbohydrates groups by automating data cleaning, analysis, and reporting workflows from lab experiments, targeting around 15 hours per week in researcher time savings.",
+      "Building predictive models to help researchers speed up experiment design and reduce time spent on trial-and-error in the lab.",
+      "Maintaining existing dashboards and building new ones in Power BI for both technical and non-technical stakeholders, supporting project and portfolio decision-making.",
+      "Reviewing data quality and consistency across project teams to protect data integrity for reporting and analysis.",
+    ],
+  },
+  {
     id: "kohler",
     company: "Kohler Co.",
     role: "Data Engineer Intern",
@@ -55,7 +72,7 @@ export const experience: ExperienceItem[] = [
     id: "apna",
     company: "Apna",
     role: "Data Engineer",
-    location: "Bangalore, India (Remote)",
+    location: "Bangalore, India",
     start: "Oct 2022",
     end: "Aug 2024",
     summary: "Marketplace Operations Trust and Safety Team",
@@ -82,7 +99,7 @@ export const experience: ExperienceItem[] = [
     id: "google-smollan",
     company: "Google (via Smollan)",
     role: "Strategy and Analytics Intern",
-    location: "Singapore (Remote)",
+    location: "Singapore",
     start: "Oct 2021",
     end: "Apr 2022",
     summary:
@@ -101,7 +118,7 @@ export const experience: ExperienceItem[] = [
     id: "spacenos",
     company: "SPACENOS",
     role: "Product Manager Intern",
-    location: "Bangalore, India (Remote)",
+    location: "Bangalore, India",
     start: "May 2021",
     end: "Jul 2021",
     tech: ["Google Analytics", "Product Metrics", "Market Research"],
@@ -116,7 +133,7 @@ export const experience: ExperienceItem[] = [
     id: "oneplus",
     company: "OnePlus",
     role: "Marketing Specialist Intern",
-    location: "Bangalore, India (Remote)",
+    location: "Bangalore, India",
     start: "Sep 2020",
     end: "Feb 2021",
     tech: [
@@ -136,7 +153,7 @@ export const experience: ExperienceItem[] = [
     id: "haryana-police",
     company: "Haryana Police",
     role: "Cybersecurity Intern, GPCSSI'20",
-    location: "Gurugram, India (Remote)",
+    location: "Gurugram, India",
     start: "Jun 2020",
     end: "Jul 2020",
     tech: [
