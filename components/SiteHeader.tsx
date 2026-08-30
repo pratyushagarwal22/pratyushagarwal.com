@@ -136,8 +136,11 @@ export function SiteHeader() {
           className="border-t border-border md:hidden"
         >
           <ul className="ml-auto grid w-max max-w-full grid-cols-2 gap-x-3 gap-y-0 py-2 pr-4 pl-4">
-            {navItems.map((item) => (
-              <li key={item.href}>
+            {navItems.map((item, i) => (
+              <li
+                key={item.href}
+                className={i === navItems.length - 1 ? "col-start-2" : undefined}
+              >
                 <a
                   href={item.href}
                   className={`${linkClassName} flex min-h-11 items-center justify-end px-2 text-right`}
