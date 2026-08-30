@@ -73,7 +73,7 @@ export const certifications: Certification[] = [
   {
     id: "google-pm",
     title: "Google Project Management Specialization",
-    issuer: "Google",
+    issuer: "Coursera",
     date: "Jul 2022",
     skills: [
       "Project Management",
@@ -89,7 +89,7 @@ export const certifications: Certification[] = [
     title: "Certified Ethical Hacker",
     issuer: "EC-Council",
     date: "Mar 2021",
-    expiry: "Expired Mar 2024",
+    expiry: "Mar 2024",
     skills: [
       "Penetration Testing",
       "Network Security",
