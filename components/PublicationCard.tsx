@@ -23,29 +23,44 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           aria-expanded={expanded}
           aria-controls={panelId}
           onClick={() => setExpanded((v) => !v)}
-          className="group w-full rounded-sm p-4 pb-0 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5 sm:pb-0"
+          className="group w-full rounded-sm p-4 pb-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:p-5 sm:pb-3"
         >
           <PublicationHeader publication={publication} />
         </button>
+      ) : null}
+
+      {hasAbstract ? (
+        <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+          <ExternalLink
+            href={publication.href}
+            eventName="publication_read"
+            eventData={{
+              venue: publication.venue,
+              title: publication.title,
+            }}
+            className="font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Read paper
+          </ExternalLink>
+        </div>
       ) : (
-        <div className="p-4 pb-0 sm:p-5 sm:pb-0">
+        <div className="p-4 sm:p-5">
           <PublicationHeader publication={publication} />
+          <div className="mt-3">
+            <ExternalLink
+              href={publication.href}
+              eventName="publication_read"
+              eventData={{
+                venue: publication.venue,
+                title: publication.title,
+              }}
+              className="font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Read paper
+            </ExternalLink>
+          </div>
         </div>
       )}
-
-      <div className="px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
-        <ExternalLink
-          href={publication.href}
-          eventName="publication_read"
-          eventData={{
-            venue: publication.venue,
-            title: publication.title,
-          }}
-          className="inline-flex min-h-11 items-center font-body text-sm text-accent underline-offset-4 hover:text-accent-hover hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Read paper
-        </ExternalLink>
-      </div>
 
       {hasAbstract ? (
         <div
