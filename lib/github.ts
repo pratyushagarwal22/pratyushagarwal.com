@@ -25,8 +25,8 @@ export type GitHubActivityData = {
   commits: RecentCommit[] | null;
 };
 
-// 2h — commit list + contribution grid refresh interval
-const REVALIDATE_SECONDS = 7200;
+// 30m — commit list + contribution grid refresh interval
+const REVALIDATE_SECONDS = 1800;
 
 const CONTRIBUTION_CALENDAR_QUERY = `
   query ContributionCalendar($login: String!) {
