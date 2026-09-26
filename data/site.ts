@@ -28,7 +28,7 @@ export const site: SiteContent = {
   shortName: "Pratyush",
   title: "Pratyush Agarwal — Building software in public",
   oneLiner:
-    "I like building things people actually use.\nThree years shipping data systems in production, now all in on software engineering.\nProof, not promises, one commit at a time.",
+    "I like building things people actually use.\nThree years in production data systems, now building software with that same rigor.\nProof, not promises, one commit at a time.",
   currentlyBuilding: { name: "Mnemo", href: "#projects" },
   resumeHref: "/pratyush-agarwal-resume.pdf",
   profileImageSrc: "/profile.png",
@@ -55,7 +55,7 @@ export const site: SiteContent = {
     },
   ],
   about:
-    "I spent three years working with data across Kohler, Apna, and Google, building pipelines, automation, and systems that teams relied on every day. Somewhere along the way I realized the parts I loved most were the software parts: designing APIs, shipping products, watching people use what I built. So I'm going all in on software engineering. I don't have years of a traditional SWE / SDE / Product Engineer title behind me, but I have production experience, I learn fast, and I'm building the proof in the open: every project public, every milestone logged, every lesson written up. If you want to see how I work, it's all here.",
+    "I spent three years working with data across Kohler, Apna, and Google, building pipelines, automation, and systems that teams relied on every day. Somewhere along the way I realized the parts I loved most were the software parts: designing APIs, shipping products, watching people use what I built. That's the work I want to keep doing.\n\nI'm early in my software engineering career, but I have real production experience, I learn fast, and I'm building the proof in the open: every project public, every milestone logged, every lesson written up. If you want to see how I work, it's all here.",
   education: [
     {
       institution: "University of Illinois Urbana-Champaign",
