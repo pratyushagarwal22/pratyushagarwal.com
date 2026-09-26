@@ -4,16 +4,8 @@ import { contentContainerClassName, sectionScrollMarginClassName } from "./Conte
 import { EntryHeader } from "./EntryHeader";
 import { SectionHeading } from "./SectionHeading";
 
-/** Split at a sentence boundary for readability — words unchanged. */
 function aboutParagraphs(text: string): string[] {
-  const marker = "So I'm going all in on software engineering.";
-  const index = text.indexOf(marker);
-  if (index === -1) return [text];
-
-  const splitAt = index + marker.length;
-  return [text.slice(0, splitAt).trim(), text.slice(splitAt).trim()].filter(
-    Boolean,
-  );
+  return text.split("\n\n").map((s) => s.trim()).filter(Boolean);
 }
 
 export function About() {
